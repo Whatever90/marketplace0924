@@ -12,7 +12,7 @@ var path = require('path');
 app.use(express.static(path.join(__dirname, '/ppm/dist')));
 var routes_setter = require('./server/config/routes.js');
 routes_setter(app);
-mongoose.connect('mongodb://localhost/basic_mongoose');
+mongoose.connect('mongodb://localhost/marketplace');
 app.listen(8000, function() {
 	console.log("listening on port 8000");
 })

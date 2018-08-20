@@ -1,4 +1,94 @@
-<div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+  <div class="row">
+
+    <div class="btn-group btn-group-justified">
+      <a href="#" class="btn btn-info cat"><h4><i class="fa fa-bars" aria-hidden="true"></i> CATEGORIES</h4></a>
+      <a href="#" class="btn btn-default"><h4>ABOUT</h4></a>
+      <a href="#" class="btn btn-default"><h4>RETURNS</h4></a>
+      <a href="#" class="btn btn-default"><h4>DELIVERY</h4></a>
+    </div>
+
+    <div class="col-md-12 shop-tab-container">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 shop-tab-menu">
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Laptop & PC's</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Cameras</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Mens Clothing</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Womens Clothing</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Watches</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Tablets</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> All Categories</h4>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab">
+
+        <div class="shop-tab-content active">
+
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="http://placehold.it/800x400" alt="...">
+                <div class="carousel-caption">
+                  <h2>Heading</h2>
+                </div>
+              </div>
+              <div class="item">
+                <img src="http://placehold.it/800x400" alt="...">
+                <div class="carousel-caption">
+                  <h2>Heading</h2>
+                </div>
+              </div>
+              <div class="item">
+                <img src="http://placehold.it/800x400" alt="...">
+                <div class="carousel-caption">
+                  <h2>Heading</h2>
+                </div>
+              </div>
+            </div>
+
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- <div>
 <div id='day'>
   <h1><span style="color: blue">Product of the day!</span></h1>
   <div class='probox' *ngIf='product'>
@@ -13,7 +103,7 @@
     </div>
     </div>
   </div>
-  
+
 <div id='input'>
   <div id='login'>
     <h1>Login</h1>
@@ -25,10 +115,10 @@
           #login_email='ngModel'>
           <strong *ngIf='login_email.invalid && ( login_email.dirty || login_email.touched)'><span style="color: red">   Uphold Email format</span></strong><strong *ngIf='login_email.valid && ( login_email.dirty || login_email.touched)'><span style="color: green">   Looks good!</span></strong>
         </h3>
-        <h3>Password: <input class='inbox' 
-          type="text" 
-          required 
-          minlength="5" 
+        <h3>Password: <input class='inbox'
+          type="text"
+          required
+          minlength="5"
           maxlength="24" name="login_password" [(ngModel)]="loginUser.password"
           #login_password='ngModel'>
         </h3>
@@ -42,65 +132,65 @@
       <form name='myForm' (submit)= "onSubmit()" #myForm="ngForm">
 
       <p>*Name: </p>
-      
-      <input 
-      type="text" 
-      name="first_name" 
-      required 
-      minlength="4" 
+
+      <input
+      type="text"
+      name="first_name"
+      required
+      minlength="4"
       maxlength="24"
       [(ngModel)]="user.first_name"
       #first_name='ngModel'
       ><strong *ngIf='first_name.valid && ( first_name.dirty || first_name.touched)'><span style="color: green">  Looks good!</span></strong>
       <strong *ngIf='first_name.invalid && ( first_name.dirty || first_name.touched)'><span style="color: red">  First name must be 4 characters long</span></strong>
-     
+
     <p>*Last name: </p>
     <script type="text/javascript">
 
     </script>
-    <input 
-      type="text" 
-      name="last_name" 
-      required 
+    <input
+      type="text"
+      name="last_name"
+      required
       minlength=password.value.length.toString()
       maxlength="24"
       [(ngModel)]="user.last_name"
       #last_name='ngModel'
     ><strong *ngIf='last_name.invalid && ( last_name.dirty || last_name.touched)'><span style="color: red">  Last name must be 4 characters long</span></strong>
     <strong *ngIf='last_name.valid && ( last_name.dirty || last_name.touched)'><span style="color: green">  Looks good!</span></strong>
-      
+
     <p>*Email: </p>
-    <input 
-      type="text" 
-      name="email" 
-      required 
+    <input
+      type="text"
+      name="email"
+      required
       pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       [(ngModel)]="user.email"
       #email='ngModel'
     ><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span style="color: red">   Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span style="color: green">   Looks good!</span></strong>
-      
 
-      
-    
+
+
+
     <p>*Password: </p>
-    <input 
-    type="password" 
-      name="password" 
-      required 
-      minlength="5" 
+    <input
+    type="password"
+      name="password"
+      required
+      minlength="5"
       maxlength="24"
       [(ngModel)]="user.password"
       #password='ngModel'
     ><strong *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
     Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span style="color: green">Looks Good!</span></strong>
-      
+
 
 
     <p>*Confirm Password: </p>
-    <input 
+    <input
       [(ngModel)]="user.con_password"
       #con_password='ngModel'
-      type="password" 
+      type="password"
       name="con_password"
       required
       ><span *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style="color: red">Too short! Read above, dude!</span></span>
@@ -109,11 +199,11 @@
 
 
     <br><br><input type="submit" [disabled]="myForm.invalid || con_password.value!=password.value">
-    
+
 
       </form>
 
     </div>
     {{users|json}}
   </div>
-</div>
+</div> -->

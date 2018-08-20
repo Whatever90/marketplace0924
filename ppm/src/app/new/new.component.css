@@ -1,10 +1,11 @@
-#main{
-	display: flex
+body{
+  background-color: #525252;
 }
-.userbox{
-	border: gold 3px solid;
-	width: 460px;
-	height: 500px;
-	background-color: azure;
-	align-items: center;
+.centered-form{
+margin-top: 60px;
+}
+
+.centered-form .panel{
+background: rgba(255, 255, 255, 0.8);
+box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
 }

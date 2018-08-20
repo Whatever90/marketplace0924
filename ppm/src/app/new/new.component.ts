@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './../user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import { TaskService } from '../task.service';
+import { User } from './../user';
+import { LoginUser } from './../loginUser';
 
 @Component({
   selector: 'app-new',
@@ -11,37 +12,60 @@ import { TaskService } from '../task.service';
   styleUrls: ['./new.component.css']
 })
 export class NewComponent implements OnInit {
-	user1 = new User();
-	user2 = new User();
-	list = [];
-	errors = [];
-	u1;
-	u2;
-	constructor(private _route: ActivatedRoute, private _taskService: TaskService, private _r: Router) { 
-		
-	};
-	// onSubmit1(){
-	// 	this._taskService.battle(this.user1.name, function(u1){
-	//  				this.u1 = u1
- //  				}.bind(this))
-	// 		console.log(this.u1)
-	// 		this.user1 = new User();
-	// }
-	// onSubmit2(){
-	// 	this._taskService.battle(this.user2.name, function(u2){
-	//  				this.u2 = u2
-	//  				console.log(u2)
- //  				}.bind(this))
-	// 		console.log(this.u2)
-	// 		this.user2 = new User()
-		
-	// }
-	// battle(){
-	// 	this._taskService.fight(this.u1, this.u2)
-	// 	this.u1 = null;
-	// 	this.u2 = null;
-	// 	this._r.navigateByUrl('results')
-	// }
-	ngOnInit() {
-	}
+  users = [];
+  user;
+  loginUser = new LoginUser();
+  error;
+  errormessage;
+  products;
+  product;
+  length;
+  switch = true;
+  constructor(private _route: ActivatedRoute, private _taskService: TaskService, private _r: Router) {
+    this.user = new User();
+  }
+  switcher() {
+    this.switch = !this.switch;
+    console.log(this.user);
+  }
+  reg() {
+    console.log(this.user);
+    // this._taskService.create(this.user, function (data) {
+    //   console.log(data);
+    //   if (!data) {
+    //     console.log('something wrong');
+    //     alert('email is already used by another user');
+    //   }
+    //   if (data) {
+    //     console.log('exellent!');
+    //     console.log(data);
+    //     this.storeUser(data);
+    //     this.errormessage = '';
+    //     this._r.navigateByUrl('browse/all');
+    //   }
+    // }.bind(this));
+    // this.user = new User();
+
+  }
+  login() {
+    console.log(this.loginUser);
+    // this._taskService.login(this.loginUser, function (data) {
+    //   console.log(data);
+    //   if (!data) {
+    //     console.log('failed to login');
+    //     alert('wrong email or password');
+    //   }
+    //   if (data) {
+    //     this.storeUser(data);
+    //     console.log('logining');
+    //     this._r.navigateByUrl('browse/all');
+    //   }
+    // }.bind(this));
+    // this.loginUser = new LoginUser;
+  }
+  storeUser(user) {
+    this._taskService.storeUs(user);
+  }
+  ngOnInit() {
+  }
 }

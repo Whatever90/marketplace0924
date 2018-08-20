@@ -13,20 +13,23 @@ import { ProductsAllComponent } from './products/products-all/products-all.compo
 import { ProductMylistComponent } from './products/product-mylist/product-mylist.component';
 
 const routes: Routes = [
-	{ path: '', component: HomeComponent },
-	{ path: 'browse', component: ProductsComponent , children:[
-		{path: 'all', component: ProductsAllComponent },
-		{path: 'listings', component: ProductMylistComponent}
-	]},
-	// { path: 'ratings', component: PostsComponent },
-	// { path: 'players/addplayer', component: HomeNewComponent },
-	// { path: 'players/delete/:id', component: HomeNewComponent },
-	
-	// { path: 'status/game/2', component: ProductsComponent },
-	// { path: 'status/game/3', component: DeleteComponent },
-	// { path: 'products/edit/:id', component: EditComponent },
-	// { path: 'products/new', component: NewComponent },
-	// { path: 'products/delete/:id', component: DeleteComponent}
+  { path: '', component: HomeComponent },
+  { path: 'login', component: NewComponent},
+  {
+    path: 'browse', component: ProductsComponent, children: [
+      { path: 'all', component: ProductsAllComponent },
+      { path: 'listings', component: ProductMylistComponent }
+    ]
+  },
+  // { path: 'ratings', component: PostsComponent },
+  // { path: 'players/addplayer', component: HomeNewComponent },
+  // { path: 'players/delete/:id', component: HomeNewComponent },
+
+  // { path: 'status/game/2', component: ProductsComponent },
+  // { path: 'status/game/3', component: DeleteComponent },
+  // { path: 'products/edit/:id', component: EditComponent },
+  // { path: 'products/new', component: NewComponent },
+  // { path: 'products/delete/:id', component: DeleteComponent}
 ];
 
 @NgModule({

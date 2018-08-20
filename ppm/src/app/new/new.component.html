@@ -1,42 +1,234 @@
-<div id="main">
-	<div class='box'>
-		<div class='userbox' *ngIf='!u1 || !u1.login'>
-			<h1>Add Player#1</h1>
+<!-- <div>
+<div id='day'>
+  <h1><span style="color: blue">Product of the day!</span></h1>
+  <div class='probox' *ngIf='product'>
+    <div id="left">
+      <img src='{{product.image}}' width='150'>
+    </div>
+    <div id='right'>
+      <h2>{{product.title}} </h2>
+      <h5>Description: {{product.description}}</h5>
+      <h3>Price: ${{product.price}}</h3>
+      <h5>Location: {{product.location}}</h5>
+    </div>
+    </div>
+  </div>
 
-			<form name='myFrom1' (submit)= "onSubmit1()" #myForm1="ngForm">
-			    GitHub Username: <input type="text" name="name1" required 
-			    minlength="3" 
-			    maxlength="24"
-			     [(ngModel)]="user1.name" #name1='ngModel'><strong *ngIf='name1.invalid && ( name1.dirty || name1.touched)'><span style="color: red">  *Name must be at least 8 characters in length</span></strong><br>
-			    
-			    <br><input type="submit" name="submit" style="background-color: blue; color: white" value="Get User#1" [disabled]="myForm1.invalid">
-			</form>
-		</div>
-		<div class="userbox" *ngIf='u1 && u1.login'>
-			<img src="{{u1.avatar_url}}">
-			<h4>{{u1.login}}</h4>
-		</div>
-	</div>
+<div id='input'>
+  <div id='login'>
+    <h1>Login</h1>
+    <form NAME='myForm2' (submit)= "login()" #myForm2="ngForm">
+        <h3>Email: <input class='inbox'
+          type="text"
+          pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          name="login_email" [(ngModel)]="loginUser.email"
+          #login_email='ngModel'>
+          <strong *ngIf='login_email.invalid && ( login_email.dirty || login_email.touched)'><span style="color: red">   Uphold Email format</span></strong><strong *ngIf='login_email.valid && ( login_email.dirty || login_email.touched)'><span style="color: green">   Looks good!</span></strong>
+        </h3>
+        <h3>Password: <input class='inbox'
+          type="text"
+          required
+          minlength="5"
+          maxlength="24" name="login_password" [(ngModel)]="loginUser.password"
+          #login_password='ngModel'>
+        </h3>
+      <input type="submit" value="Login" [disabled]="myForm2.invalid">
+    </form>
+  </div>
 
-	<div class='box'>
-		<div class='userbox' *ngIf='!u2 || !u2.login'>
-			<h1>Add Player#2</h1>
-			<form name='myFrom2' (submit)= "onSubmit2()" #myForm2="ngForm">
-			    GitHub Username: <input type="text" name="name2" required 
-			    minlength="3" 
-			    maxlength="24"
-			     [(ngModel)]="user2.name" #name2='ngModel'><strong *ngIf='name2.invalid && ( name2.dirty || name2.touched)'><span style="color: red">  *Name must be at least 8 characters in length</span></strong><br>
-			    
-			    <br><input type="submit" name="submit" style="background-color: blue; color: white" value="Get User#2" [disabled]="myForm2.invalid">
-			</form>
-		</div>
-		<div class="userbox" *ngIf='u2 && u2.login'>
-			<img src="{{u2.avatar_url}}">
-			<h4>{{u2.login}}</h4>
-		</div>
-	</div>
-	
+  <div id="registration">
+    <h1>Registration</h1>
+    <div>
+      <form name='myForm' (submit)= "onSubmit()" #myForm="ngForm">
+
+      <p>*Name: </p>
+
+      <input
+      type="text"
+      name="first_name"
+      required
+      minlength="4"
+      maxlength="24"
+      [(ngModel)]="user.first_name"
+      #first_name='ngModel'
+      ><strong *ngIf='first_name.valid && ( first_name.dirty || first_name.touched)'><span style="color: green">  Looks good!</span></strong>
+      <strong *ngIf='first_name.invalid && ( first_name.dirty || first_name.touched)'><span style="color: red">  First name must be 4 characters long</span></strong>
+
+    <p>*Last name: </p>
+    <script type="text/javascript">
+
+    </script>
+    <input
+      type="text"
+      name="last_name"
+      required
+      minlength=password.value.length.toString()
+      maxlength="24"
+      [(ngModel)]="user.last_name"
+      #last_name='ngModel'
+    ><strong *ngIf='last_name.invalid && ( last_name.dirty || last_name.touched)'><span style="color: red">  Last name must be 4 characters long</span></strong>
+    <strong *ngIf='last_name.valid && ( last_name.dirty || last_name.touched)'><span style="color: green">  Looks good!</span></strong>
+
+    <p>*Email: </p>
+    <input
+      type="text"
+      name="email"
+      required
+      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      [(ngModel)]="user.email"
+      #email='ngModel'
+    ><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span style="color: red">   Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span style="color: green">   Looks good!</span></strong>
+
+
+
+
+    <p>*Password: </p>
+    <input
+    type="password"
+      name="password"
+      required
+      minlength="5"
+      maxlength="24"
+      [(ngModel)]="user.password"
+      #password='ngModel'
+    ><strong *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
+    Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span style="color: green">Looks Good!</span></strong>
+
+
+
+    <p>*Confirm Password: </p>
+    <input
+      [(ngModel)]="user.con_password"
+      #con_password='ngModel'
+      type="password"
+      name="con_password"
+      required
+      ><span *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style="color: red">Too short! Read above, dude!</span></span>
+    <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span style="color: red">Password and confimation have to match</span></strong>
+    <strong *ngIf='con_password.value == password.value && password.valid'><span style="color: green">Looks Good!</span></strong>
+
+
+    <br><br><input type="submit" [disabled]="myForm.invalid || con_password.value!=password.value">
+
+
+      </form>
+
+    </div>
+    {{users|json}}
+  </div>
+</div> -->
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container" *ngIf='switch===true'>
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Please sign up for MarketPlace <small>It's free!</small></h3>
+        </div>
+        <div class="panel-body">
+          <form name='regForm' (submit)="reg()" #regForm="ngForm">
+            <div class="form-group">
+              <input type="text"
+               name="alias" id="alias"
+                required minlength="3"
+                 maxlength="24"
+                  [(ngModel)]="user.alias"
+                  #alias='ngModel'
+                   class="form-control input-sm"
+                placeholder="Alias">
+                <strong *ngIf='alias.valid && ( alias.dirty || alias.touched)'><span style="color: green">
+                  Looks good!</span></strong>
+              <strong *ngIf='alias.invalid && ( alias.dirty || alias.touched)'><span style="color: red"> Alias must be at
+                  least 3 characters long</span></strong>
+            </div>
+            <div class="form-group">
+              <input type="text" name="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="user.email" #email='ngModel'
+                class="form-control input-sm" placeholder="E-mail"><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span
+                  style="color: red"> Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span
+                  style="color: green"> Looks good!</span></strong>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="password" type="password" name="password" required minlength="5" maxlength="24" [(ngModel)]="user.password"
+                    #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><strong
+                    *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
+                      Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span
+                      style="color: green">Looks Good!</span></strong>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="password" [(ngModel)]="user.con_password" #con_password='ngModel' type="password" name="con_password" required
+                    id="con_password" class="form-control input-sm" placeholder="Confirm Password"><span
+                    *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style="color: red">Too
+                      short! Read above, dude!</span></span>
+                  <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span
+                      style="color: red">Password and confimation have to match</span></strong>
+                  <strong *ngIf='con_password.value == password.value && password.valid'><span style="color: green">Looks
+                      Good!</span></strong>
+                </div>
+              </div>
+            </div>
+
+            <input type="submit" [disabled]="regForm.invalid || con_password.value!=password.value" value="Register" class="btn btn-info btn-block">
+            <button (click)="switcher()" class="btn btn-primary btn-block">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div *ngIf='u2 && u2.login && u1 && u1.login'>
-		<button (click)='battle()'>BATTLE</button>
-	</div>
+<!-- login form -->
+
+<div class="container" *ngIf='switch===false'>
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Sign In</h3>
+        </div>
+        <div class="panel-body">
+          <form role="form">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                </div>
+              </div>
+            </div>
+
+            <input type="submit" value="Login" class="btn btn-info btn-block">
+            <button (click)="switcher()" class="btn btn-primary btn-block">Registration</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
