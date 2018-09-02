@@ -6,6 +6,7 @@ import { TaskService } from '../task.service';
 import { User } from './../user';
 import { LoginUser } from './../loginUser';
 
+
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -16,7 +17,7 @@ export class NewComponent implements OnInit {
   user;
   loginUser = new LoginUser();
   error;
-  errormessage;
+  errormessage = '';
   products;
   product;
   length;
@@ -30,38 +31,38 @@ export class NewComponent implements OnInit {
   }
   reg() {
     console.log(this.user);
-    // this._taskService.create(this.user, function (data) {
-    //   console.log(data);
-    //   if (!data) {
-    //     console.log('something wrong');
-    //     alert('email is already used by another user');
-    //   }
-    //   if (data) {
-    //     console.log('exellent!');
-    //     console.log(data);
-    //     this.storeUser(data);
-    //     this.errormessage = '';
-    //     this._r.navigateByUrl('browse/all');
-    //   }
-    // }.bind(this));
-    // this.user = new User();
+    console.log('asd');
+    this._taskService.create(this.user, function (data, err) {
+      if (data) {
+        this.errormessage = '';
+        this._taskService.changeUserSession(data);
+        this._r.navigateByUrl('');
+      }
+      if (err) {
+        console.log(err);
+        console.log('something wrong');
+        this.errormessage = 'email is already used by another user';
+        alert('email is already used by another user');
+      }
+    }.bind(this));
+    this.user = new User();
 
   }
-  login() {
-    console.log(this.loginUser);
-    // this._taskService.login(this.loginUser, function (data) {
-    //   console.log(data);
-    //   if (!data) {
-    //     console.log('failed to login');
-    //     alert('wrong email or password');
-    //   }
-    //   if (data) {
-    //     this.storeUser(data);
-    //     console.log('logining');
-    //     this._r.navigateByUrl('browse/all');
-    //   }
-    // }.bind(this));
-    // this.loginUser = new LoginUser;
+  log() {
+    this._taskService.login(this.loginUser, function (data, err) {
+      console.log(data);
+      console.log(err);
+      if (data) {
+        this.errormessage = '';
+        this._taskService.changeUserSession(data);
+        this._r.navigateByUrl('');
+      }
+      if (err) {
+        this.errormessage = 'Wrong email or password';
+        alert('wrong email or password');
+      }
+    }.bind(this));
+    this.loginUser = new LoginUser;
   }
   storeUser(user) {
     this._taskService.storeUs(user);

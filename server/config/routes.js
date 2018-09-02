@@ -12,37 +12,27 @@ var path = require('path')
 console.log('GELLO!')
 module.exports = function(app) {
 app.get('/users', (req, res, next)=>{
-	// console.log("let's show all players!")
   	user.showAll(req, res)
     });
-///////////////////////////////////////////////////////////////
-/////////////////////////!!!!!!!///////////////////////////////
-/////////////////////////!!!!!!!///////////////////////////////
-///////////////////////////////////////////////////////////////
 app.post('/user/new', (req, res, next)=>{
-  console.log('recieve, registraion!!!!!!!!!!')
-  console.log('----------------------------------')
   user.create(req, res)
 });
 app.post('/user/login', (req, res, next)=>{
-  console.log('recieve, login!!!!!!!!!!')
-  console.log('----------------------------------')
   user.login(req, res)
 });
 app.post('/user/store', (req, res, next)=>{
-  console.log('routes.js: storing user in session!!!!!!!!!!')
-  console.log('----------------------------------')
   user.store(req, res)
 });
 app.post("/user/showuser", (req, res, next)=>{
-  console.log('routes.js: checking user in session!!!!!!!!!!')
-  console.log('----------------------------------')
-  user.showuser(req, res)
+  user.retrieve(req, res)
 });
-app.post("/user/logout", (req, res, next)=>{
-  console.log('routes.js: logouting user in session!!!!!!!!!!')
-  console.log('----------------------------------')
+app.get("/user/logout", (req, res, next)=>{
   user.logout(req, res)
+});
+app.post('/user/contact', (req, res, next)=>{
+  console.log('recieve, contact!!!!!!!!!!')
+  console.log('----------------------------------')
+  user.contact(req, res)
 });
 
 
@@ -59,12 +49,6 @@ app.post('/products/new', (req, res, next)=>{
   console.log('we r in routes.js/products/creating a product')
   product.create(req, res)
 })
-
-app.post('/user/contact', (req, res, next)=>{
-  console.log('recieve, contact!!!!!!!!!!')
-  console.log('----------------------------------')
-  user.contact(req, res)
-});
 app.post('/products/update', (req, res, next)=>{
   console.log('recieve, contact!!!!!!!!!!')
   console.log('----------------------------------')

@@ -10,12 +10,9 @@ var Product = mongoose.model('Product');
 //console.log(User)
 module.exports = {
   showAll: function(req, res){
-    console.log("Hello there! Ill bring you all products!")
     Product.find({}, function(err, data){
       if(err){
-        console.log("++++++++++++++++++++++++++++++++++++")
         res.json(err)
-        console.log("++++++++++++++++++++++++++++++++++++")
       }else{
         res.json(data)
       }

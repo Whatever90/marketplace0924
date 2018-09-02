@@ -141,11 +141,22 @@ var AppComponent = (function () {
         this.post = new __WEBPACK_IMPORTED_MODULE_3__anonpost__["a" /* Anonpost */]();
         this.errors = [];
         this.check = [];
+        this.checkUser();
     }
-    ;
+    AppComponent.prototype.checkUser = function () {
+        this._taskService.showUser(function (data, err) {
+            if (data) {
+                console.log(data);
+                this.user = data;
+            }
+            else {
+                console.log(err);
+                console.log('seems like there is no one');
+            }
+        }.bind(this));
+    };
     AppComponent.prototype.onSubmit = function () {
     };
-    ;
     AppComponent.prototype.showAll = function () {
     };
     AppComponent.prototype.ngOnInit = function () {
@@ -673,72 +684,61 @@ var HomeComponent = (function () {
         this.users = [];
         this.user = new __WEBPACK_IMPORTED_MODULE_4__user__["a" /* User */]();
         this.loginUser = new __WEBPACK_IMPORTED_MODULE_5__loginUser__["a" /* LoginUser */]();
-        this.showOne();
+        this.showAll();
     }
     HomeComponent.prototype.showAll = function () {
-        console.log('lets show all!');
-        this._taskService.showMe(function (err, data) {
+        this._taskService.showMe(function (data, err) {
             console.log(data);
             console.log('----------------------');
             console.log(err);
-            if (err) {
-                console.log('somehow true statement is ERROR, lol');
-                console.log(err);
-                this.products = err;
-                console.log(this.products.length);
-                this.product = this.products[Math.floor(Math.random() * this.products.length)];
-            }
             if (data) {
+                console.log('somehow true statement is ERROR, lol');
+                console.log(data);
+                this.products = data;
+                console.log(this.products);
+            }
+            if (err) {
                 console.log('yes!!!!!!!!!!!!!!');
                 this.products = data;
             }
         }.bind(this));
     };
-    HomeComponent.prototype.showOne = function () {
-        this.showAll();
-        this.length = 1;
-        console.log('=====================');
-        console.log(this.products);
-        console.log('=====================');
-        // var x = Math.floor(Math.random()*length)
-        // this.product = this.product[x]
-    };
-    HomeComponent.prototype.onSubmit = function () {
-        console.log(this.user);
-        this._taskService.create(this.user, function (data) {
-            console.log(data);
-            if (!data) {
-                console.log('something wrong');
-                alert('email is already used by another user');
-            }
-            if (data) {
-                console.log('exellent!');
-                console.log(data);
-                this.storeUser(data);
-                this.errormessage = '';
-                this._r.navigateByUrl('browse/all');
-            }
-        }.bind(this));
-        this.user = new __WEBPACK_IMPORTED_MODULE_4__user__["a" /* User */]();
-    };
-    HomeComponent.prototype.login = function () {
-        this._taskService.login(this.loginUser, function (data) {
-            console.log(data);
-            if (!data) {
-                console.log('failed to login');
-                alert('wrong email or password');
-            }
-            if (data) {
-                this.storeUser(data);
-                console.log('logining');
-                this._r.navigateByUrl('browse/all');
-            }
-        }.bind(this));
-        this.loginUser = new __WEBPACK_IMPORTED_MODULE_5__loginUser__["a" /* LoginUser */];
-    };
-    HomeComponent.prototype.storeUser = function (user) {
-        this._taskService.storeUs(user);
-    };
+    // onSubmit() {
+    //   console.log(this.user);
+    //   this._taskService.create(this.user, function (data) {
+    //     console.log(data);
+    //     if (!data) {
+    //       console.log('something wrong');
+    //       alert('email is already used by another user');
+    //     }
+    //     if (data) {
+    //       console.log('exellent!');
+    //       console.log(data);
+    //       this.storeUser(data);
+    //       this.errormessage = '';
+    //       this._r.navigateByUrl('browse/all');
+    //     }
+    //   }.bind(this));
+    //   this.user = new User();
+    // }
+    // login() {
+    //   this._taskService.login(this.loginUser, function (data) {
+    //     console.log(data);
+    //     if (!data) {
+    //       console.log('failed to login');
+    //       alert('wrong email or password');
+    //     }
+    //     if (data) {
+    //       this.storeUser(data);
+    //       console.log('logining');
+    //       this._r.navigateByUrl('browse/all');
+    //     }
+    //   }.bind(this));
+    //   this.loginUser = new LoginUser;
+    // }
+    // storeUser(user) {
+    //   this._taskService.storeUs(user);
+    // }
     HomeComponent.prototype.ngOnInit = function () {
     };
     return HomeComponent;
@@ -797,7 +797,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/new/new.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div>\n<div id='day'>\n  <h1><span style=\"color: blue\">Product of the day!</span></h1>\n  <div class='probox' *ngIf='product'>\n    <div id=\"left\">\n      <img src='{{product.image}}' width='150'>\n    </div>\n    <div id='right'>\n      <h2>{{product.title}} </h2>\n      <h5>Description: {{product.description}}</h5>\n      <h3>Price: ${{product.price}}</h3>\n      <h5>Location: {{product.location}}</h5>\n    </div>\n    </div>\n  </div>\n\n<div id='input'>\n  <div id='login'>\n    <h1>Login</h1>\n    <form NAME='myForm2' (submit)= \"login()\" #myForm2=\"ngForm\">\n        <h3>Email: <input class='inbox'\n          type=\"text\"\n          pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\"\n          name=\"login_email\" [(ngModel)]=\"loginUser.email\"\n          #login_email='ngModel'>\n          <strong *ngIf='login_email.invalid && ( login_email.dirty || login_email.touched)'><span style=\"color: red\">   Uphold Email format</span></strong><strong *ngIf='login_email.valid && ( login_email.dirty || login_email.touched)'><span style=\"color: green\">   Looks good!</span></strong>\n        </h3>\n        <h3>Password: <input class='inbox'\n          type=\"text\"\n          required\n          minlength=\"5\"\n          maxlength=\"24\" name=\"login_password\" [(ngModel)]=\"loginUser.password\"\n          #login_password='ngModel'>\n        </h3>\n      <input type=\"submit\" value=\"Login\" [disabled]=\"myForm2.invalid\">\n    </form>\n  </div>\n\n  <div id=\"registration\">\n    <h1>Registration</h1>\n    <div>\n      <form name='myForm' (submit)= \"onSubmit()\" #myForm=\"ngForm\">\n\n      <p>*Name: </p>\n\n      <input\n      type=\"text\"\n      name=\"first_name\"\n      required\n      minlength=\"4\"\n      maxlength=\"24\"\n      [(ngModel)]=\"user.first_name\"\n      #first_name='ngModel'\n      ><strong *ngIf='first_name.valid && ( first_name.dirty || first_name.touched)'><span style=\"color: green\">  Looks good!</span></strong>\n      <strong *ngIf='first_name.invalid && ( first_name.dirty || first_name.touched)'><span style=\"color: red\">  First name must be 4 characters long</span></strong>\n\n    <p>*Last name: </p>\n    <script type=\"text/javascript\">\n\n    </script>\n    <input\n      type=\"text\"\n      name=\"last_name\"\n      required\n      minlength=password.value.length.toString()\n      maxlength=\"24\"\n      [(ngModel)]=\"user.last_name\"\n      #last_name='ngModel'\n    ><strong *ngIf='last_name.invalid && ( last_name.dirty || last_name.touched)'><span style=\"color: red\">  Last name must be 4 characters long</span></strong>\n    <strong *ngIf='last_name.valid && ( last_name.dirty || last_name.touched)'><span style=\"color: green\">  Looks good!</span></strong>\n\n    <p>*Email: </p>\n    <input\n      type=\"text\"\n      name=\"email\"\n      required\n      pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\"\n      [(ngModel)]=\"user.email\"\n      #email='ngModel'\n    ><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span style=\"color: red\">   Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span style=\"color: green\">   Looks good!</span></strong>\n\n\n\n\n    <p>*Password: </p>\n    <input\n    type=\"password\"\n      name=\"password\"\n      required\n      minlength=\"5\"\n      maxlength=\"24\"\n      [(ngModel)]=\"user.password\"\n      #password='ngModel'\n    ><strong *ngIf='password.invalid && ( password.dirty || password.touched)'><span style=\"color: red\">\n    Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span style=\"color: green\">Looks Good!</span></strong>\n\n\n\n    <p>*Confirm Password: </p>\n    <input\n      [(ngModel)]=\"user.con_password\"\n      #con_password='ngModel'\n      type=\"password\"\n      name=\"con_password\"\n      required\n      ><span *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style=\"color: red\">Too short! Read above, dude!</span></span>\n    <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span style=\"color: red\">Password and confimation have to match</span></strong>\n    <strong *ngIf='con_password.value == password.value && password.valid'><span style=\"color: green\">Looks Good!</span></strong>\n\n\n    <br><br><input type=\"submit\" [disabled]=\"myForm.invalid || con_password.value!=password.value\">\n\n\n      </form>\n\n    </div>\n    {{users|json}}\n  </div>\n</div> -->\n<link href=\"//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css\" rel=\"stylesheet\" id=\"bootstrap-css\">\n<script src=\"//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js\"></script>\n<script src=\"//code.jquery.com/jquery-1.11.1.min.js\"></script>\n<!------ Include the above in your HEAD tag ---------->\n\n<div class=\"container\" *ngIf='switch===true'>\n  <div class=\"row centered-form\">\n    <div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\">\n      <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">Please sign up for MarketPlace <small>It's free!</small></h3>\n        </div>\n        <div class=\"panel-body\">\n          <form role=\"form\">\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"text\" name=\"first_name\" id=\"first_name\" class=\"form-control input-sm\" placeholder=\"First Name\">\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"text\" name=\"last_name\" id=\"last_name\" class=\"form-control input-sm\" placeholder=\"Last Name\">\n                </div>\n              </div>\n            </div>\n\n            <div class=\"form-group\">\n              <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control input-sm\" placeholder=\"Email Address\">\n            </div>\n\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" name=\"password\" id=\"password\" class=\"form-control input-sm\" placeholder=\"Password\">\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" name=\"password_confirmation\" id=\"password_confirmation\" class=\"form-control input-sm\" placeholder=\"Confirm Password\">\n                </div>\n              </div>\n            </div>\n\n            <input type=\"submit\" value=\"Register\" class=\"btn btn-info btn-block\">\n            <button (click)=\"switcher()\" class=\"btn btn-primary btn-block\">Login</button>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- login form -->\n\n<div class=\"container\" *ngIf='switch===false'>\n  <div class=\"row centered-form\">\n    <div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\">\n      <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">Sign In</h3>\n        </div>\n        <div class=\"panel-body\">\n          <form role=\"form\">\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"text\" name=\"first_name\" id=\"first_name\" class=\"form-control input-sm\" placeholder=\"First Name\">\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"text\" name=\"last_name\" id=\"last_name\" class=\"form-control input-sm\" placeholder=\"Last Name\">\n                </div>\n              </div>\n            </div>\n\n            <div class=\"form-group\">\n              <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control input-sm\" placeholder=\"Email Address\">\n            </div>\n\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" name=\"password\" id=\"password\" class=\"form-control input-sm\" placeholder=\"Password\">\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" name=\"password_confirmation\" id=\"password_confirmation\" class=\"form-control input-sm\" placeholder=\"Confirm Password\">\n                </div>\n              </div>\n            </div>\n\n            <input type=\"submit\" value=\"Login\" class=\"btn btn-info btn-block\">\n            <button (click)=\"switcher()\" class=\"btn btn-primary btn-block\">Registration</button>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<!-- <div>\n<div id='day'>\n  <h1><span style=\"color: blue\">Product of the day!</span></h1>\n  <div class='probox' *ngIf='product'>\n    <div id=\"left\">\n      <img src='{{product.image}}' width='150'>\n    </div>\n    <div id='right'>\n      <h2>{{product.title}} </h2>\n      <h5>Description: {{product.description}}</h5>\n      <h3>Price: ${{product.price}}</h3>\n      <h5>Location: {{product.location}}</h5>\n    </div>\n    </div>\n  </div>\n\n<div id='input'>\n  <div id='login'>\n    <h1>Login</h1>\n    <form NAME='myForm2' (submit)= \"login()\" #myForm2=\"ngForm\">\n        <h3>Email: <input class='inbox'\n          type=\"text\"\n          pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\"\n          name=\"login_email\" [(ngModel)]=\"loginUser.email\"\n          #login_email='ngModel'>\n          <strong *ngIf='login_email.invalid && ( login_email.dirty || login_email.touched)'><span style=\"color: red\">   Uphold Email format</span></strong><strong *ngIf='login_email.valid && ( login_email.dirty || login_email.touched)'><span style=\"color: green\">   Looks good!</span></strong>\n        </h3>\n        <h3>Password: <input class='inbox'\n          type=\"text\"\n          required\n          minlength=\"5\"\n          maxlength=\"24\" name=\"login_password\" [(ngModel)]=\"loginUser.password\"\n          #login_password='ngModel'>\n        </h3>\n      <input type=\"submit\" value=\"Login\" [disabled]=\"myForm2.invalid\">\n    </form>\n  </div>\n\n  <div id=\"registration\">\n    <h1>Registration</h1>\n    <div>\n      <form name='myForm' (submit)= \"onSubmit()\" #myForm=\"ngForm\">\n\n      <p>*Name: </p>\n\n      <input\n      type=\"text\"\n      name=\"first_name\"\n      required\n      minlength=\"4\"\n      maxlength=\"24\"\n      [(ngModel)]=\"user.first_name\"\n      #first_name='ngModel'\n      ><strong *ngIf='first_name.valid && ( first_name.dirty || first_name.touched)'><span style=\"color: green\">  Looks good!</span></strong>\n      <strong *ngIf='first_name.invalid && ( first_name.dirty || first_name.touched)'><span style=\"color: red\">  First name must be 4 characters long</span></strong>\n\n    <p>*Last name: </p>\n    <script type=\"text/javascript\">\n\n    </script>\n    <input\n      type=\"text\"\n      name=\"last_name\"\n      required\n      minlength=password.value.length.toString()\n      maxlength=\"24\"\n      [(ngModel)]=\"user.last_name\"\n      #last_name='ngModel'\n    ><strong *ngIf='last_name.invalid && ( last_name.dirty || last_name.touched)'><span style=\"color: red\">  Last name must be 4 characters long</span></strong>\n    <strong *ngIf='last_name.valid && ( last_name.dirty || last_name.touched)'><span style=\"color: green\">  Looks good!</span></strong>\n\n    <p>*Email: </p>\n    <input\n      type=\"text\"\n      name=\"email\"\n      required\n      pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\"\n      [(ngModel)]=\"user.email\"\n      #email='ngModel'\n    ><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span style=\"color: red\">   Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span style=\"color: green\">   Looks good!</span></strong>\n\n\n\n\n    <p>*Password: </p>\n    <input\n    type=\"password\"\n      name=\"password\"\n      required\n      minlength=\"5\"\n      maxlength=\"24\"\n      [(ngModel)]=\"user.password\"\n      #password='ngModel'\n    ><strong *ngIf='password.invalid && ( password.dirty || password.touched)'><span style=\"color: red\">\n    Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span style=\"color: green\">Looks Good!</span></strong>\n\n\n\n    <p>*Confirm Password: </p>\n    <input\n      [(ngModel)]=\"user.con_password\"\n      #con_password='ngModel'\n      type=\"password\"\n      name=\"con_password\"\n      required\n      ><span *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style=\"color: red\">Too short! Read above, dude!</span></span>\n    <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span style=\"color: red\">Password and confimation have to match</span></strong>\n    <strong *ngIf='con_password.value == password.value && password.valid'><span style=\"color: green\">Looks Good!</span></strong>\n\n\n    <br><br><input type=\"submit\" [disabled]=\"myForm.invalid || con_password.value!=password.value\">\n\n\n      </form>\n\n    </div>\n    {{users|json}}\n  </div>\n</div> -->\n<link href=\"//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css\" rel=\"stylesheet\" id=\"bootstrap-css\">\n<script src=\"//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js\"></script>\n<script src=\"//code.jquery.com/jquery-1.11.1.min.js\"></script>\n<!------ Include the above in your HEAD tag ---------->\n\n<div class=\"container\" *ngIf='switch===true'>\n  <div class=\"row centered-form\">\n    <div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\">\n      <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">Please sign up for MarketPlace <small>It's free!</small></h3>\n        </div>\n        <div class=\"panel-body\">\n          <form name='regForm' (submit)=\"reg()\" #regForm=\"ngForm\">\n            <div class=\"form-group\">\n              <input type=\"text\"\n               name=\"alias\" id=\"alias\"\n                required minlength=\"3\"\n                 maxlength=\"24\"\n                  [(ngModel)]=\"user.alias\"\n                  #alias='ngModel'\n                   class=\"form-control input-sm\"\n                placeholder=\"Alias\">\n                <strong *ngIf='alias.valid && ( alias.dirty || alias.touched)'><span style=\"color: green\">\n                  Looks good!</span></strong>\n              <strong *ngIf='alias.invalid && ( alias.dirty || alias.touched)'><span style=\"color: red\"> Alias must be at\n                  least 3 characters long</span></strong>\n            </div>\n            <div class=\"form-group\">\n              <input type=\"text\" name=\"email\" required pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\" [(ngModel)]=\"user.email\" #email='ngModel'\n                class=\"form-control input-sm\" placeholder=\"E-mail\"><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span\n                  style=\"color: red\"> Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span\n                  style=\"color: green\"> Looks good!</span></strong>\n            </div>\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" type=\"password\" name=\"password\" required minlength=\"5\" maxlength=\"24\" [(ngModel)]=\"user.password\"\n                    #password='ngModel' id=\"password\" class=\"form-control input-sm\" placeholder=\"Password\"><strong\n                    *ngIf='password.invalid && ( password.dirty || password.touched)'><span style=\"color: red\">\n                      Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span\n                      style=\"color: green\">Looks Good!</span></strong>\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" [(ngModel)]=\"user.con_password\" #con_password='ngModel' type=\"password\" name=\"con_password\" required\n                    id=\"con_password\" class=\"form-control input-sm\" placeholder=\"Confirm Password\"><span\n                    *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style=\"color: red\">Too\n                      short! Read above, dude!</span></span>\n                  <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span\n                      style=\"color: red\">Password and confimation have to match</span></strong>\n                  <strong *ngIf='con_password.value == password.value && password.valid'><span style=\"color: green\">Looks\n                      Good!</span></strong>\n                </div>\n              </div>\n            </div>\n\n            <input type=\"submit\" [disabled]=\"regForm.invalid || con_password.value!=password.value\" value=\"Register\" class=\"btn btn-info btn-block\">\n            <button (click)=\"switcher()\" class=\"btn btn-primary btn-block\">Login</button>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- login form -->\n\n<div class=\"container\" *ngIf='switch===false'>\n  <div class=\"row centered-form\">\n    <div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\">\n      <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n          <h3 class=\"panel-title\">Sign In</h3>\n        </div>\n        <div class=\"panel-body\">\n          <form role=\"form\">\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"text\" name=\"first_name\" id=\"first_name\" class=\"form-control input-sm\" placeholder=\"First Name\">\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"text\" name=\"last_name\" id=\"last_name\" class=\"form-control input-sm\" placeholder=\"Last Name\">\n                </div>\n              </div>\n            </div>\n\n            <div class=\"form-group\">\n              <input type=\"email\" name=\"email\" id=\"email\" class=\"form-control input-sm\" placeholder=\"Email Address\">\n            </div>\n\n            <div class=\"row\">\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" name=\"password\" id=\"password\" class=\"form-control input-sm\" placeholder=\"Password\">\n                </div>\n              </div>\n              <div class=\"col-xs-6 col-sm-6 col-md-6\">\n                <div class=\"form-group\">\n                  <input type=\"password\" name=\"password_confirmation\" id=\"password_confirmation\" class=\"form-control input-sm\" placeholder=\"Confirm Password\">\n                </div>\n              </div>\n            </div>\n\n            <input type=\"submit\" value=\"Login\" class=\"btn btn-info btn-block\">\n            <button (click)=\"switcher()\" class=\"btn btn-primary btn-block\">Registration</button>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -834,46 +834,53 @@ var NewComponent = (function () {
         this._taskService = _taskService;
         this._r = _r;
         this.users = [];
-        this.user = new __WEBPACK_IMPORTED_MODULE_4__user__["a" /* User */]();
         this.loginUser = new __WEBPACK_IMPORTED_MODULE_5__loginUser__["a" /* LoginUser */]();
+        this.errormessage = '';
         this.switch = true;
+        this.user = new __WEBPACK_IMPORTED_MODULE_4__user__["a" /* User */]();
     }
     NewComponent.prototype.switcher = function () {
         this.switch = !this.switch;
+        console.log(this.user);
     };
     NewComponent.prototype.reg = function () {
         console.log(this.user);
-        // this._taskService.create(this.user, function (data) {
-        //   console.log(data);
-        //   if (!data) {
-        //     console.log('something wrong');
-        //     alert('email is already used by another user');
-        //   }
-        //   if (data) {
-        //     console.log('exellent!');
-        //     console.log(data);
-        //     this.storeUser(data);
-        //     this.errormessage = '';
-        //     this._r.navigateByUrl('browse/all');
-        //   }
-        // }.bind(this));
-        // this.user = new User();
+        console.log('asd');
+        this._taskService.create(this.user, function (data, err) {
+            console.log(data);
+            console.log(err);
+            if (data) {
+                console.log(data);
+                // console.log('something wrong');
+                // this.errormessage = 'email is already used by another user';
+                // alert('email is already used by another user');
+            }
+            if (err) {
+                console.log(err);
+                // console.log('exellent!');
+                // console.log(data);
+                // this.errormessage = '';
+                // this._r.navigateByUrl('');
+            }
+        }.bind(this));
+        this.user = new __WEBPACK_IMPORTED_MODULE_4__user__["a" /* User */]();
     };
     NewComponent.prototype.login = function () {
         console.log(this.loginUser);
-        // this._taskService.login(this.loginUser, function (data) {
-        //   console.log(data);
-        //   if (!data) {
-        //     console.log('failed to login');
-        //     alert('wrong email or password');
-        //   }
-        //   if (data) {
-        //     this.storeUser(data);
-        //     console.log('logining');
-        //     this._r.navigateByUrl('browse/all');
-        //   }
-        // }.bind(this));
-        // this.loginUser = new LoginUser;
+        this._taskService.login(this.loginUser, function (data) {
+            console.log(data);
+            if (!data) {
+                console.log('failed to login');
+                this.errormessage = 'Wrong email or password';
+                alert('wrong email or password');
+            }
+            if (data) {
+                console.log('logining');
+                this.errormessage = '';
+                this._r.navigateByUrl('');
+            }
+        }.bind(this));
+        this.loginUser = new __WEBPACK_IMPORTED_MODULE_5__loginUser__["a" /* LoginUser */];
     };
     NewComponent.prototype.storeUser = function (user) {
         this._taskService.storeUs(user);
@@ -1464,10 +1471,9 @@ var TaskService = (function () {
         this.key = [];
         this.posts = [];
     }
-    ;
     TaskService.prototype.create = function (user, callback) {
         console.log('second step of storing');
-        this._http.post("/user/new", user)
+        this._http.post('/user/new', user)
             .map(function (data) { return data.json(); }) //
             .subscribe(function (data) { return callback(data); });
     };
@@ -1478,13 +1484,13 @@ var TaskService = (function () {
     };
     TaskService.prototype.login = function (user, callback) {
         console.log('second step of login');
-        this._http.post("/user/login", user)
+        this._http.post('/user/login', user)
             .map(function (data) { return data.json(); }) //
             .subscribe(function (data) { return callback(data); });
     };
     TaskService.prototype.showUser = function (callback) {
         console.log('checking user in session');
-        this._http.post("/user/showuser", "lol")
+        this._http.post('/user/showuser', 'lol')
             .map(function (data) { return data.json(); }) //
             .subscribe(function (data) { return callback(data); });
     };
@@ -1531,13 +1537,13 @@ var TaskService = (function () {
     };
     TaskService.prototype.show = function (callback) {
         console.log('show all!');
-        this._http.get("/users").subscribe(function (data) { return callback(data.json()); }, function (err) { return console.log(err); });
+        this._http.get('/users').subscribe(function (data) { return callback(data.json()); }, function (err) { return console.log(err); });
     };
     TaskService.prototype.add = function (user) {
         this.context = user;
-        console.log("service is trying..");
+        console.log('service is trying..');
         console.log(this.context);
-        this._http.post("/user/new", this.context)
+        this._http.post('/user/new', this.context)
             .map(function (data) { return data.json(); })
             .toPromise();
         console.log('did it work?');
@@ -1572,7 +1578,7 @@ var TaskService = (function () {
     TaskService.prototype.delete = function (id) {
         console.log(id);
         id = { id: id };
-        this._http.post("/user/delete/", id)
+        this._http.post('/user/delete/', id)
             .map(function (data) { return data.json(); })
             .toPromise();
         console.log('did it work?');
@@ -1624,14 +1630,12 @@ var updateProduct = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return User; });
 var User = (function () {
-    function User(first_name, last_name, email, password, con_password) {
-        if (first_name === void 0) { first_name = ""; }
-        if (last_name === void 0) { last_name = ""; }
-        if (email === void 0) { email = ""; }
-        if (password === void 0) { password = ""; }
-        if (con_password === void 0) { con_password = ""; }
-        this.first_name = first_name;
-        this.last_name = last_name;
+    function User(alias, email, password, con_password) {
+        if (alias === void 0) { alias = ''; }
+        if (email === void 0) { email = ''; }
+        if (password === void 0) { password = ''; }
+        if (con_password === void 0) { con_password = ''; }
+        this.alias = alias;
         this.email = email;
         this.password = password;
         this.con_password = con_password;

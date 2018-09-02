@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'listings', component: ProductMylistComponent }
     ]
   },
+  { path: 'user/:id', component: HomeListComponent, pathMatch: 'full'  },
   // { path: 'ratings', component: PostsComponent },
   // { path: 'players/addplayer', component: HomeNewComponent },
   // { path: 'players/delete/:id', component: HomeNewComponent },

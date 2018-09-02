@@ -117,33 +117,36 @@
   .carousel-control.right {
     background-image: none;
   }
-/* #registration{
-	border: black solid 1px;
-	width: 350px;
-	padding: 5px 5px;
-
+/* product list */
+.price{
+  font-size: 20px;
+    margin: 0 auto;
+    color: #333;
 }
-#login{
-	border: black solid 1px;
-	width: 350px;
-	padding: 5px 5px;
+.right{
+  float:right;
+  border-bottom: 2px solid #4B8E4B;
 }
-#input{
-	display: flex;
-	padding: 10px 10px;
-	margin: auto 10;
+.thumbnail{
+  opacity:0.70;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
-.probox{
-	border: 1px solid black;
-	background-color: azure;
-	width: 712px;
-	padding: 5px 5px;
-	display: flex;
+.thumbnail:hover{
+  opacity:1.00;
+  box-shadow: 0px 0px 10px #4bc6ff;
 }
-#day{
-	margin-left: 10px;
-	border: 1px solid black;
-	width: 712px;
-	padding: 5px 5px;
-	display: flex;
-} */
+.line{
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 770px) {
+  .right{
+    float:left;
+    width: 100%;
+  }
+}
+.product-img{
+  max-width: 200px;
+  max-height: 200px;
+  object-fit:scale-down;
+}

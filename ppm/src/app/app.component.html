@@ -2,9 +2,10 @@
   <div id="head_content">
     <a href="#default" class="logo">MarketPlace</a>
     <div class="header-right">
-      <a class="active" href="#home">Home</a>
-      <a href="#contact">Contact</a>
-      <a [routerLink]="['/login']">Login/Registration</a>
+      <a [routerLink]="['/user',user._id]" *ngIf="user!=null">{{ user.alias }}</a>
+      <a [routerLink]="['/login']" *ngIf="user==null">Login/Registration</a>
+      <a [routerLink]="['/']" *ngIf="user!=null" (click)="logout()">Logout</a>
+      <button (click)="checkUser()">Checksession</button>
     </div>
   </div>
 </div>
