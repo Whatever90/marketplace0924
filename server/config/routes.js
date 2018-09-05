@@ -8,88 +8,81 @@ var express = require('express')
 var path = require('path')
 //var app = express();
 // more new code:
-//app.use(session({secret: 'codingdojorocks'})); 
-console.log('GELLO!')
-module.exports = function(app) {
-app.get('/users', (req, res, next)=>{
-  	user.showAll(req, res)
-    });
-app.post('/user/new', (req, res, next)=>{
-  user.create(req, res)
-});
-app.post('/user/login', (req, res, next)=>{
-  user.login(req, res)
-});
-app.post('/user/store', (req, res, next)=>{
-  user.store(req, res)
-});
-app.post("/user/showuser", (req, res, next)=>{
-  user.retrieve(req, res)
-});
-app.get("/user/logout", (req, res, next)=>{
-  user.logout(req, res)
-});
-app.post('/user/contact', (req, res, next)=>{
-  console.log('recieve, contact!!!!!!!!!!')
-  console.log('----------------------------------')
-  user.contact(req, res)
-});
+//app.use(session({secret: 'codingdojorocks'}));
+module.exports = function (app) {
+
+  // USER FUNCTIONS------------------
+  app.get('/users', (req, res, next) => {
+    user.showAll(req, res)
+  });
+  app.post('/user/new', (req, res, next) => {
+    user.create(req, res)
+  });
+  app.post('/user/login', (req, res, next) => {
+    user.login(req, res)
+  });
+  app.post('/user/store', (req, res, next) => {
+    user.store(req, res)
+  });
+  app.post("/user/showuser", (req, res, next) => {
+    user.retrieve(req, res)
+  });
+  app.get("/user/logout", (req, res, next) => {
+    user.logout(req, res)
+  });
+  app.post('/user/contact', (req, res, next) => {
+    user.contact(req, res)
+  });
 
 
-
-app.post('/products/all', (req, res, next)=>{
-  console.log('we r in routes.js/products/all')
-  product.showAll(req, res)
-})
-app.post('/products/mylist', (req, res, next)=>{
-  console.log('we r in routes.js/products/mylist')
-  product.mylist(req, res)
-})
-app.post('/products/new', (req, res, next)=>{
-  console.log('we r in routes.js/products/creating a product')
-  product.create(req, res)
-})
-app.post('/products/update', (req, res, next)=>{
-  console.log('recieve, contact!!!!!!!!!!')
-  console.log('----------------------------------')
-  product.update(req, res)
-});
-app.post('/products/delete', (req, res, next)=>{
-  console.log('recieve, contact!!!!!!!!!!')
-  console.log('----------------------------------')
-  product.delete(req, res)
-});
+  // PRODUCT FUNCTIONS---------------------------
+  app.post('/products/all', (req, res, next) => {
+    product.showAll(req, res)
+  })
+  app.post('/products/mylist', (req, res, next) => {
+    product.mylist(req, res)
+  })
+  app.post('/products/new', (req, res, next) => {
+    console.log("a new product", req.body)
+    product.create(req, res)
+  })
+  app.post('/products/update', (req, res, next) => {
+    product.update(req, res)
+  });
+  app.post('/products/delete', (req, res, next) => {
+    product.delete(req, res)
+  });
 
 
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-/////////////////////////!!!!!!!///////////////////////////////
-/////////////////////////!!!!!!!///////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  /////////////////////////!!!!!!!///////////////////////////////
+  /////////////////////////!!!!!!!///////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
 
-app.post('/posts', (req, res, next)=>{
- res.json(true)
-   });
+  app.post('/posts', (req, res, next) => {
+    res.json(true)
+  });
 
-app.post("/user/delete/", (req, res, next)=>{
+  app.post("/user/delete/", (req, res, next) => {
     console.log('delete')
-  //console.log(req)
-  user.delete(req, res)
-   });
-app.post('/user/update/', (req, res, next)=>{
-  user.update(req, res)
-});
-app.post('/user/update/2', (req, res, next)=>{
-  user.update2(req, res)
-})
-app.post('/user/update/3', (req, res, next)=>{
-  user.update3(req, res)
-})
-app.all("*", (req,res,next) => {
-        res.sendFile(path.resolve("./ppm/dist/index.html"))
-    });
+    //console.log(req)
+    user.delete(req, res)
+  });
+  app.post('/user/update/', (req, res, next) => {
+    user.update(req, res)
+  });
+  app.post('/user/update/2', (req, res, next) => {
+    user.update2(req, res)
+  })
+  app.post('/user/update/3', (req, res, next) => {
+    user.update3(req, res)
+  })
+  app.all("*", (req, res, next) => {
+    res.sendFile(path.resolve("./ppm/dist/index.html"))
+  });
 }
 // app.post('/login', function(req, res, next)=>{
 //  res.json(true)
@@ -118,11 +111,11 @@ app.all("*", (req,res,next) => {
 //   //     res.render('user', {user: arr})
 //   //   }
 //   // })
-  
+
 // })
 
 // app.get('/users/edit/:id', function(req, res){
-  
+
 //   // console.log(req.params.id)
 //   // User.find({_id: req.params.id}, function(err, arr){
 //   //   if(err){
@@ -155,13 +148,13 @@ app.all("*", (req,res,next) => {
 // //     console.log(req.body.name)
 // //     console.log(req.body.age)
 // //       res.redirect('/')
-    
+
 // //   }
 // // })
 // 			users.user_update(req, res)
 // })
 // app.get('/users/destroy/:id', function(req, res){
-  
+
 //   // console.log(req.params.id)
 //   // User.remove({_id: req.params.id}, function(err, arr){
 //   //   if(err){
@@ -171,6 +164,6 @@ app.all("*", (req,res,next) => {
 //   //     res.redirect('/')
 //   //   }
 //   // })
-      
+
 //     		users.user_destroy(req, res)
 //   })

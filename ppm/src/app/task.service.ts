@@ -34,7 +34,7 @@ export class TaskService {
       .map(data => data.json()) //
       .subscribe(data => callback(data));
   }
-  showUser(callback) {
+  showUser(callback) { // get user from session
     this._http.post('/user/showuser', 'lol')
       .map(data => data.json()) //
       .subscribe(data => callback(data));
@@ -51,7 +51,7 @@ export class TaskService {
       (err) => console.log(err)
     );
   }
-  getUser(user, callback) {
+  getUser(user, callback) { // find user by ID
     user = {
       user: user
     };
@@ -61,11 +61,10 @@ export class TaskService {
       .subscribe(data => callback(data));
   }
 // -=========Product functions============-
-  newProduct(product) {
-    this._http.post('/products/new', product).subscribe(
-      (data) => data = data.json(),
-      (err) => console.log(err)
-    );
+  newProduct(product, callback) {
+    this._http.post('/products/new', product)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
   }
   updateProduct(product) {
     console.log('TASKSERVICE:', product);

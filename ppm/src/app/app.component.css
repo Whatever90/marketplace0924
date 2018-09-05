@@ -14,8 +14,15 @@
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+  background-image: url(https://source.unsplash.com/random);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
-
+#router{
+  height: 91vh;
+  background-color: rgba(8, 7, 97, 0.1);
+}
 .header {
   overflow: hidden;
   background-color: #f1f1f1;

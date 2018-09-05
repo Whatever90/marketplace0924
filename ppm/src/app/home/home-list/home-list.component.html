@@ -1,14 +1,13 @@
-
-<div class="container">
+<div class="container" *ngIf='user!=null'>
   <div class="row">
 
     <div class="btn-group btn-group-justified">
-      <a href="#" class="btn btn-info cat"><h4><i class="fa fa-bars" aria-hidden="true"></i> USER ALIAS</h4></a>
-      <a href="#" class="btn btn-default"><h4>+ POST AN ITEM</h4></a>
-      <a href="#" class="btn btn-default"><h4>TOTAL OF ITEMS</h4></a>
+      <!-- <a href='#' class="btn btn-info cat" *ngIf='user._id!=cur_user_id'><h3>{{user.alias}}</h3></a> -->
+
+      <a href='#' class="btn btn-info cat" *ngIf='user._id==cur_user_id' (click)="adding($event)"><h3>+ POST AN ITEM</h3></a>
+      <a href="#" class="btn btn-default"><h4>TOTAL OF ITEMS: {{products.length}}</h4></a>
       <a href="#" class="btn btn-default"><h4>WISH LIST</h4></a>
     </div>
-
     <div class="col-md-12 shop-tab-container">
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 shop-tab-menu">
         <div class="list-group">
@@ -20,117 +19,97 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab">
-        <!-- Product list START -->
-        <div class="col-md-3 col-sm-6">
-          <span class="thumbnail">
-              <img class='product-img' src="https://source.unsplash.com/collection/1163637/480x480" alt="...">
-              <h4>Product Tittle 1</h4>
-              <p class='product-description'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              <hr class="line">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <p class="price">$29,90</p>
+      <!-- FROM FOR A NEW PRODUCT -->
+      <div class="col-md-12 shop-tab-container" *ngIf='adder'>
+        <div class="container">
+          <div class="row centered-form">
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Post a product</h3>
                 </div>
-              </div>
-          </span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <span class="thumbnail">
-              <img class='product-img' src="https://source.unsplash.com/collection/1113637/480x480" alt="...">
-              <h4>Product Tittle 2</h4>
-              <div class="ratings">
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star-empty"></span>
-                  </div>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              <hr class="line">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <p class="price">$29,90</p>
-                </div>
-              </div>
-          </span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <span class="thumbnail">
-              <img class='product-img' src="https://source.unsplash.com/collection/1163617/480x480" alt="...">
-              <h4>Product Tittle 3</h4>
-              <div class="ratings">
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star-empty"></span>
-                  </div>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              <hr class="line">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <p class="price">$29,90</p>
-                </div>
-              </div>
-          </span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <span class="thumbnail">
-              <img class='product-img' src="https://source.unsplash.com/collection/1161637/480x480" alt="...">
-              <h4>Product Tittle 4</h4>
-              <div class="ratings">
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star-empty"></span>
-                  </div>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              <hr class="line">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <p class="price">$29,90</p>
-                </div>
-              </div>
-          </span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <span class="thumbnail">
-              <img src="https://source.unsplash.com/collection/1163632/480x480" alt="...">
-              <h4>Product Tittle 5</h4>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              <hr class="line">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <p class="price">$29,90</p>
-                </div>
-              </div>
-          </span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <span class="thumbnail">
-              <img src="https://source.unsplash.com/collection/1163631/480x480" alt="...">
-              <h4>Product Tittle 6</h4>
-              <div class="ratings">
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star-empty"></span>
-                  </div>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              <hr class="line">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <p class="price">$29,90</p>
-                </div>
-              </div>
-          </span>
-        </div>
-        <!-- Product list END -->
-      </div>
+                <div class="panel-body">
+                  <form name='productForm' (submit)="adding_submit()" #productForm="ngForm">
+                    <div class="form-group">
+                      <input type="text" name="title" id="title" required minlength="3" maxlength="24" [(ngModel)]="product.title" #title='ngModel'
+                        class="form-control input-sm" placeholder="title">
+                      <strong *ngIf='title.valid && ( title.dirty || title.touched)'><span style="color: green">
+                          Looks good!</span></strong>
+                      <strong *ngIf='title.invalid && ( title.dirty || title.touched)'><span style="color: red"> Title must
+                          be at least 3 characters long</span></strong>
+                    </div>
+                    <div class="form-group">
+                      <input type="number" oninput="this.value = Math.abs(this.value)" name="price" min="0" step="0.01" max="25000" required [(ngModel)]="product.price"
+                        #price='ngModel' class="form-control input-sm" placeholder="Price"><strong *ngIf='price.invalid && ( price.dirty || price.touched)'><span
+                          style="color: red"> Uphold price format</span></strong><strong *ngIf='price.valid && ( price.dirty || price.touched)'><span
+                          style="color: green"> Looks good!</span></strong>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                          <label for="category">Category:</label>
+                          <select name='category' required [(ngModel)]="product.category" #category='ngModel' id='category' class="form-control">
+                            <option value="computers">Computers</option>
+                            <option value="menclothings">Mens Clothings</option>
+                            <option value="womenclothings">Womens Clothings</option>
+                            <option value="jewelry">Jewelry</option>
+                            <option value="cars">Cars</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                          <input type="number" name="location" pattern="[0-9]{5}" required [(ngModel)]="product.location" #location='ngModel' class="form-control input-sm"
+                            placeholder="location"><strong *ngIf='location.invalid && ( location.dirty || location.touched)'><span
+                              style="color: red"> Uphold location format</span></strong><strong *ngIf='location.valid && ( location.dirty || price.touched)'><span
+                              style="color: green"> Looks good!</span></strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group">
+                        <label for="description">Desciption:</label>
+                        <textarea class="form-control" rows="5" type="text" name="description" required minlength="3" maxlength="24" [(ngModel)]="product.description"
+                          #description='ngModel' id="description" class="form-control input-sm" placeholder="description"></textarea><strong
+                          *ngIf='description.invalid && ( description.dirty || description.touched)'><span style="color: red">
+                            description name must be 3 characters long. </span></strong><strong *ngIf='description.valid && ( description.dirty || description.touched)'><span
+                            style="color: green">Looks Good!</span></strong>
+                      </div>
+                    </div>
 
+                    <input type="submit" [disabled]="productForm.invalid" value="Post" class="btn btn-info btn-block">
+                    <button (click)="adding_cancel()" class="btn btn-primary btn-block">CANCEL</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END OF FORM -->
+      <!-- List of products -->
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length>0'>
+        <div class="col-md-3 col-sm-6" *ngFor='let p of products'>
+          <span class="thumbnail">
+            <img class='product-img' src={{p.images[0]}} alt="...">
+            <h4>{{p.title}}</h4>
+            <p class='product-description'>{{p.description}}</p>
+            <hr class="line">
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
+                <p class="price" *ngIf='p.price==0'>FREE</p>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <!-- Product list END -->
+
+      <!-- Empty list -->
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length===0'>
+        <h2>Nothing for sale</h2>
+      </div>
+      <!-- End of empty list -->
     </div>
   </div>
-</div>

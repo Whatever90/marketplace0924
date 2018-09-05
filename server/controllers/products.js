@@ -9,69 +9,68 @@ let temp = ''
 var Product = mongoose.model('Product');
 //console.log(User)
 module.exports = {
-  showAll: function(req, res){
-    Product.find({}, function(err, data){
-      if(err){
-        res.json(err)
-      }else{
-        res.json(data)
-      }
-    })
-  },
-  mylist: function(req, res){
-    console.log("Hello there! Ill bring you all your products! your id is", req.body.id)
-    Product.find({seller: req.body.id}, function(err, data){
-      if(err){
-        res.json(err)
-      }else{
-        res.json(data)
-      }
-    })
-  },
-
-  
-create: function(req, res) {
-  console.log("++++++++++++++++++++++++++++++++++++")
-    var product = new Product({
-      title: req.body.title,
-      price: req.body.price,
-      description: req.body.description,
-      location: req.body.location,
-      image: req.body.image,
-      seller: req.body.seller
-    });
-  product.save(function(err, data) {
-    if(err) {
+  showAll: function (req, res) {
+    Product.find({}, function (err, data) {
+      if (err) {
         res.json(err)
       } else {
         res.json(data)
       }
     })
   },
-  update: function(req, res){
+  mylist: function (req, res) {
+    console.log("Hello there! Ill bring you all your products! your id is", req.body.id)
+    Product.find({ seller: req.body.id }, function (err, data) {
+      if (err) {
+        res.json(err)
+      } else {
+        res.json(data)
+      }
+    })
+  },
+  create: function (req, res) {
+    console.log("++++++++++++++++++++++++++++++++++++")
+    var product = new Product({
+      title: req.body.title,
+      price: req.body.price,
+      description: req.body.description,
+      location: req.body.location,
+      images: req.body.images,
+      category: req.body.category,
+      seller: req.body.seller
+    });
+    product.save(function (data, err) {
+      if (err) {
+        res.json(err)
+      } else {
+        res.json(data)
+      }
+    })
+  },
+  update: function (req, res) {
     console.log("Let's update product with id#", req.body.id)
-    Product.update({_id: req.body.id}, {$set: {title: req.body.title, description: req.body.description, price: req.body.price, location: req.body.location, image: req.body.image}}, function(err, data){
-      if(err){
+    Product.update({ _id: req.body.id }, { $set: { title: req.body.title, description: req.body.description, price: req.body.price, location: req.body.location, image: req.body.image } }, function (err, data) {
+      if (err) {
         console.log("++++++++++++++++++++++++++++++++++++")
         res.json(err)
         console.log("++++++++++++++++++++++++++++++++++++")
-      }else{
+      } else {
         console.log('WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!')
         res.json(data)
       }
     })
-  },  
-  delete: function(req, res){
+  },
+  delete: function (req, res) {
     console.log("DELETING product with id#", req.body.id)
-    Product.remove({_id: req.body.id}, function(err, data){
-      if(err){
+    Product.remove({ _id: req.body.id }, function (err, data) {
+      if (err) {
         console.log("++++++++++++++++++++++++++++++++++++")
-      }else{
+      } else {
         console.log('WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!')
         res.json(data)
       }
     })
-  },    
+  },
 }
 // login: function(req, res){
 //   //req.query.id
@@ -81,7 +80,7 @@ create: function(req, res) {
 //       User.find({email: req.body.login_email}, function(err, data){
 //         if(err){
 //           console.log('failed to find')
-          
+
 //         }else{
 //           console.log(data.length)
 //           if(!data.length){
@@ -99,7 +98,7 @@ create: function(req, res) {
 //               }
 //             }
 //           }
-        
+
 //     })
 //   console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
 //   },
@@ -110,7 +109,7 @@ create: function(req, res) {
 //       } else{
 //         res.redirect('/')
 //       }
-      
+
 //   },
 //   logout: function(req, res){
 //     console.log('session ', req.session._id);
@@ -122,12 +121,12 @@ create: function(req, res) {
 //         res.redirect('/')
 //       }
 //     })
-   
-    
+
+
 //   },
 
 
-  
+
   //   user_destroy: function(req, res){
 
   // console.log(req.params.id)
@@ -141,7 +140,7 @@ create: function(req, res) {
   //     res.json(data);
   //   }
   // })
-      
+
   // },
   // show_user: function(req, res){
   //  console.log(req.params.id)
@@ -171,7 +170,7 @@ create: function(req, res) {
 
 
  //  create: function(req, res) {
-  		
+
  //   if(parseInt(req.body.age)>0){
  //      console.log('creating a user')  
  //    var user = new User({
@@ -192,7 +191,7 @@ create: function(req, res) {
  //   }else{
  //    res.render('./../client/views/create.ejs', {title: 'you have errors!', errors: "valid number"})
  //   }
-    
+
  //  },
  //  show_user: function(req, res){
  //  	console.log("+++++++++++++++++")
@@ -248,6 +247,6 @@ create: function(req, res) {
  //      res.redirect('/')
  //    }
  //  })
-      
+
  //  }
 

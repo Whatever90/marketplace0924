@@ -58,7 +58,7 @@ module.exports = {
   },
   contact: function (req, res) {
 
-    User.find({ _id: req.body.user })
+    User.findOne({ _id: req.body.user })
       .then(data => {
         res.json(data);
       })

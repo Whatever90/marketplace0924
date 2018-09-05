@@ -1,6 +1,5 @@
 
   div.shop-tab-container{
-    z-index: 10;
     background-color: #ffffff;
     padding: 0 !important;
     border-radius: 0px;
@@ -91,7 +90,7 @@
 
   .carousel-caption {
     background-color: rgba(0,0,0,.5);
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     right: 0;
     bottom: 0;
@@ -102,7 +101,7 @@
   }
 
   .carousel-indicators {
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     right: 0;
     left: 0;
