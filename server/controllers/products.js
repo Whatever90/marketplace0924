@@ -19,7 +19,6 @@ module.exports = {
     })
   },
   mylist: function (req, res) {
-    console.log("Hello there! Ill bring you all your products! your id is", req.body.id)
     Product.find({ seller: req.body.id }, function (err, data) {
       if (err) {
         res.json(err)
@@ -51,11 +50,8 @@ module.exports = {
     console.log("Let's update product with id#", req.body.id)
     Product.update({ _id: req.body.id }, { $set: { title: req.body.title, description: req.body.description, price: req.body.price, location: req.body.location, image: req.body.image } }, function (err, data) {
       if (err) {
-        console.log("++++++++++++++++++++++++++++++++++++")
         res.json(err)
-        console.log("++++++++++++++++++++++++++++++++++++")
       } else {
-        console.log('WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!')
         res.json(data)
       }
     })
@@ -71,6 +67,15 @@ module.exports = {
       }
     })
   },
+  findByID: function (req, res) {
+    Product.findOne({ _id: req.body.id }, function (data, err) {
+      if (data) {
+        res.json(data)
+      } else {
+        res.json(err)
+      }
+    })
+  }
 }
 // login: function(req, res){
 //   //req.query.id

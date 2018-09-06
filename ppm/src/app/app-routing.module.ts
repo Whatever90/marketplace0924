@@ -5,24 +5,17 @@ import { EditComponent } from './edit/edit.component';
 import { NewComponent } from './new/new.component';
 import { ProductsComponent } from './products/products.component';
 import { DeleteComponent } from './delete/delete.component';
-import { PostsComponent } from './posts/posts.component';
 import { HomeListComponent } from './home/home-list/home-list.component';
-import { HomeNewComponent } from './home/home-new/home-new.component';
-import { AllComponent } from './products/all/all.component';
-import { ProductsAllComponent } from './products/products-all/products-all.component';
-import { ProductMylistComponent } from './products/product-mylist/product-mylist.component';
+import { ConversationComponent } from './conversation/conversation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: NewComponent},
-  {
-    path: 'browse', component: ProductsComponent, children: [
-      { path: 'all', component: ProductsAllComponent },
-      { path: 'listings', component: ProductMylistComponent }
-    ]
-  },
   { path: 'user/:id', component: HomeListComponent, pathMatch: 'full'  },
-  // { path: 'ratings', component: PostsComponent },
+  { path: 'product/:id', component: ProductsComponent },
+  { path: 'conversation/:con_id', component: ConversationComponent},
+
+  { path: '**', component: DeleteComponent },
   // { path: 'players/addplayer', component: HomeNewComponent },
   // { path: 'players/delete/:id', component: HomeNewComponent },
 

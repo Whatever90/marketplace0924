@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import {Location} from '@angular/common'
 import 'rxjs/add/operator/switchMap';
 import { TaskService } from '../task.service';
 import { User } from './../user';
@@ -22,7 +23,7 @@ export class NewComponent implements OnInit {
   product;
   length;
   switch = true;
-  constructor(private _route: ActivatedRoute, private _taskService: TaskService, private _r: Router) {
+  constructor(private _location: Location, private _route: ActivatedRoute, private _taskService: TaskService, private _r: Router) {
     this.user = new User();
   }
   switcher() {
@@ -36,7 +37,7 @@ export class NewComponent implements OnInit {
       if (data) {
         this.errormessage = '';
         this._taskService.changeUserSession(data);
-        this._r.navigateByUrl('');
+        this._location.back();
       }
       if (err) {
         console.log(err);
@@ -55,7 +56,7 @@ export class NewComponent implements OnInit {
       if (data) {
         this.errormessage = '';
         this._taskService.changeUserSession(data);
-        this._r.navigateByUrl('');
+        this._location.back();
       }
       if (err) {
         this.errormessage = 'Wrong email or password';

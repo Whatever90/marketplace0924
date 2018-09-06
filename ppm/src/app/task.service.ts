@@ -55,8 +55,12 @@ export class TaskService {
     user = {
       user: user
     };
-    console.log(user);
     this._http.post('/user/contact', user)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
+  }
+  addToWishList(obj, callback) {
+    this._http.post('/user/addToWishList', obj)
       .map(data => data.json())
       .subscribe(data => callback(data));
   }
@@ -66,8 +70,15 @@ export class TaskService {
       .map(data => data.json())
       .subscribe(data => callback(data));
   }
+  findProduct(id, callback) {
+    id = {
+      id: id
+    };
+    this._http.post('/products/find', id)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
+  }
   updateProduct(product) {
-    console.log('TASKSERVICE:', product);
     this._http.post('/products/update', product).subscribe(
       (data) => data = data.json(),
       (err) => console.log(err)
@@ -79,7 +90,6 @@ export class TaskService {
       .subscribe(data => callback(data));
   }
   showMylist(id, callback) {
-    console.log(id);
     id = {
       id: id
     };
@@ -96,13 +106,18 @@ export class TaskService {
       (err) => console.log(err)
     );
   }
+// Conversation, chats, messages, etc
+  findConversation(obj, callback) {
+    this._http.post('/conversation/find', obj).subscribe(
+      (data) => data = data.json(),
+      (err) => console.log(err)
+    );
+  }
 
 
 
 
-
-
-
+// ADMIN FUNCTION++++++++++++++++++++++++++
   show(callback) {
     console.log('show all!');
     this._http.get('/users').subscribe(

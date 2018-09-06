@@ -13,15 +13,9 @@
         <div class="panel-body">
           <form name='regForm' (submit)="reg()" #regForm="ngForm">
             <div class="form-group">
-              <input type="text"
-               name="alias" id="alias"
-                required minlength="3"
-                 maxlength="24"
-                  [(ngModel)]="user.alias"
-                  #alias='ngModel'
-                   class="form-control input-sm"
-                placeholder="Alias">
-                <strong *ngIf='alias.valid && ( alias.dirty || alias.touched)'><span style="color: green">
+              <input type="text" name="alias" id="alias" required minlength="3" maxlength="24" [(ngModel)]="user.alias" #alias='ngModel'
+                class="form-control input-sm" placeholder="Alias">
+              <strong *ngIf='alias.valid && ( alias.dirty || alias.touched)'><span style="color: green">
                   Looks good!</span></strong>
               <strong *ngIf='alias.invalid && ( alias.dirty || alias.touched)'><span style="color: red"> Alias must be at
                   least 3 characters long</span></strong>
@@ -47,51 +41,170 @@
                   <input type="password" [(ngModel)]="user.con_password" #con_password='ngModel' type="password" name="con_password" required
                     id="con_password" class="form-control input-sm" placeholder="Confirm Password"><span
                     *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style="color: red">Too
-                      short! Read above, dude!</span></span>
-                  <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span
-                      style="color: red">Password and confimation have to match</span></strong>
-                  <strong *ngIf='con_password.value == password.value && password.valid'><span style="color: green">Looks
-                      Good!</span></strong>
+                      short! Read above, dude!</span></span><div class="container" *ngIf='user!=null'>
+                    <div class="row">
+
+                      <div class="btn-group btn-group-justified">
+                        <!-- <a href='#' class="btn btn-info cat" *ngIf='user._id!=cur_user_id'><h3>{{user.alias}}</h3></a> -->
+
+                        <a href='#' class="btn btn-info cat" *ngIf='user._id==cur_user_id' (click)="adding($event)"><h3>+
+                            POST AN ITEM</h3></a>
+                        <a href="#" class="btn btn-default"><h4>TOTAL OF ITEMS: {{products.length}}</h4></a>
+                        <a href="#" class="btn btn-default"><h4>WISH LIST</h4></a>
+                      </div>
+                      <div class="col-md-12 shop-tab-container">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 shop-tab-menu">
+                          <div class="list-group">
+                            <div class="list-group-item">
+                              <h4>USER's INFO</h4>
+                            </div>
+                            <div class="list-group-item">
+                              <h4>GOOGLE MAP</h4>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- FROM FOR A NEW PRODUCT -->
+                        <div class="col-md-12 shop-tab-container" *ngIf='adder'>
+                          <div class="container">
+                            <div class="row centered-form">
+                              <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <h3 class="panel-title">Post a product</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                    <form name='productForm' (submit)="adding_submit()" #productForm="ngForm">
+                                      <div class="form-group">
+                                        <input type="text" name="title" id="title" required minlength="3" maxlength="24" [(ngModel)]="product.title" #title='ngModel'
+                                          class="form-control input-sm" placeholder="title">
+                                        <strong *ngIf='title.valid && ( title.dirty || title.touched)'><span style="color: green">
+                                            Looks good!</span></strong>
+                                        <strong *ngIf='title.invalid && ( title.dirty || title.touched)'><span style="color: red">
+                                          Title must be at least 3 characters long</span></strong>
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="number" oninput="this.value = Math.abs(this.value)" name="price" min="0" step="0.01" max="25000" required [(ngModel)]="product.price"
+                                          #price='ngModel' class="form-control input-sm" placeholder="Price"><strong
+                                          *ngIf='price.invalid && ( price.dirty || price.touched)'><span style="color: red">
+                                          Uphold price format</span></strong><strong *ngIf='price.valid && ( price.dirty || price.touched)'><span
+                                            style="color: green"> Looks good!</span></strong>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                          <div class="form-group">
+                                            <label for="category">Category:</label>
+                                            <select name='category' required [(ngModel)]="product.category" #category='ngModel' id='category' class="form-control">
+                                              <option value="computers">Computers</option>
+                                              <option value="menclothings">Mens Clothings</option>
+                                              <option value="womenclothings">Womens Clothings</option>
+                                              <option value="jewelry">Jewelry</option>
+                                              <option value="cars">Cars</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                          <div class="form-group">
+                                            <input type="number" name="location" pattern="[0-9]{5}" required [(ngModel)]="product.location" #location='ngModel' class="form-control input-sm"
+                                              placeholder="location"><strong *ngIf='location.invalid && ( location.dirty || location.touched)'><span
+                                                style="color: red"> Uphold location format</span></strong><strong *ngIf='location.valid && ( location.dirty || price.touched)'><span
+                                                style="color: green"> Looks good!</span></strong>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="form-group">
+                                          <label for="description">Desciption:</label>
+                                          <textarea class="form-control" rows="5" type="text" name="description" required minlength="3" maxlength="24" [(ngModel)]="product.description"
+                                            #description='ngModel' id="description" class="form-control input-sm" placeholder="description"></textarea><strong
+                                            *ngIf='description.invalid && ( description.dirty || description.touched)'><span
+                                              style="color: red">
+                                              description name must be 3 characters long. </span></strong><strong *ngIf='description.valid && ( description.dirty || description.touched)'><span
+                                              style="color: green">Looks Good!</span></strong>
+                                        </div>
+                                      </div>
+
+                                      <input type="submit" [disabled]="productForm.invalid" value="Post" class="btn btn-info btn-block">
+                                      <button (click)="adding_cancel()" class="btn btn-primary btn-block">CANCEL</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- END OF FORM -->
+                        <!-- List of products -->
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length>0'>
+                          <div class="col-md-3 col-sm-6" *ngFor='let p of products'>
+                            <span class="thumbnail">
+                              <img class='product-img' src={{p.images[0]}} alt="...">
+                              <h4>{{p.title}}</h4>
+                              <p class='product-description'>{{p.description}}</p>
+                              <hr class="line">
+                              <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                  <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
+                                  <p class="price" *ngIf='p.price==0'>FREE</p>
+                                </div>
+                              </div>
+                            </span>
+                          </div>
+                        </div>
+                        <!-- Product list END -->
+
+                        <!-- Empty list -->
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length===0'>
+                          <h2>Nothing for sale</h2>
+                        </div>
+                        <!-- End of empty list -->
+                      </div>
+                    </div>
+
+                    <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span
+                        style="color: red">Password and confimation have to match</span></strong>
+                    <strong *ngIf='con_password.value == password.value && password.valid'><span style="color: green">Looks
+                        Good!
+                      </span></strong>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <input type="submit" [disabled]="regForm.invalid || con_password.value!=password.value" value="Register" class="btn btn-info btn-block">
-            <button (click)="switcher()" class="btn btn-primary btn-block">Login</button>
+              <input type="submit" [disabled]="regForm.invalid || con_password.value!=password.value" value="Register" class="btn btn-info btn-block">
+              <button (click)="switcher()" class="btn btn-primary btn-block">Login</button>
           </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- login form -->
-<div class="container" *ngIf='switch===false'>
-  <div class="row centered-form">
-    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Sign In</h3>
-        </div>
-        <div class="panel-body">
-          <form name='logForm' (submit)="log()" #logForm="ngForm">
-            <div class="form-group">
-              <input type="text" name="email" #email='ngModel' required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="loginUser.email" #email='ngModel'
-                class="form-control input-sm" placeholder="E-mail"><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span
-                  style="color: red"> Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span
-                  style="color: green"> Looks good!</span></strong>
-            </div>
-                <div class="form-group">
-                  <input type="password" type="password" name="password" required minlength="5" maxlength="24" [(ngModel)]="loginUser.password"
-                    #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><strong
-                    *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
-                      Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span
-                      style="color: green">Looks Good!</span></strong>
-                </div>
-            <input type="submit" value="Login" [disabled]="logForm.invalid" class="btn btn-info btn-block">
-            <button (click)="switcher()" class="btn btn-primary btn-block">Registration</button>
-          </form>
+  <!-- login form -->
+  <div class="container" *ngIf='switch===false'>
+    <div class="row centered-form">
+      <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sign In</h3>
+          </div>
+          <div class="panel-body">
+            <form name='logForm' (submit)="log()" #logForm="ngForm">
+              <div class="form-group">
+                <input type="text" name="email" #email='ngModel' required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="loginUser.email"
+                  #email='ngModel' class="form-control input-sm" placeholder="E-mail"><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span
+                    style="color: red"> Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span
+                    style="color: green"> Looks good!</span></strong>
+              </div>
+              <div class="form-group">
+                <input type="password" type="password" name="password" required minlength="5" maxlength="24" [(ngModel)]="loginUser.password"
+                  #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><strong
+                  *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
+                    Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span
+                    style="color: green">Looks Good!</span></strong>
+              </div>
+              <input type="submit" value="Login" [disabled]="logForm.invalid" class="btn btn-info btn-block">
+              <button (click)="switcher()" class="btn btn-primary btn-block">Registration</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>

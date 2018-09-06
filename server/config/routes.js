@@ -33,6 +33,9 @@ module.exports = function (app) {
   app.post('/user/contact', (req, res, next) => {
     user.contact(req, res)
   });
+  app.post('/user/addToWishList', (req, res, next) => {
+    user.addToWishList(req, res)
+  });
 
 
   // PRODUCT FUNCTIONS---------------------------
@@ -41,6 +44,9 @@ module.exports = function (app) {
   })
   app.post('/products/mylist', (req, res, next) => {
     product.mylist(req, res)
+  })
+  app.post('/products/find', (req, res, next) => {
+    product.findByID(req, res)
   })
   app.post('/products/new', (req, res, next) => {
     console.log("a new product", req.body)

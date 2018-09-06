@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   loginUser = new LoginUser();
   error;
   errormessage;
-  products;
+  products = [];
   product;
   length;
 
@@ -27,18 +27,11 @@ export class HomeComponent implements OnInit {
   }
   showAll() {
     this._taskService.showMe(function (data, err) {
-      console.log(data);
-      console.log('----------------------');
-      console.log(err);
       if (data) {
-        console.log('somehow true statement is ERROR, lol');
-        console.log(data);
         this.products = data;
-        console.log(this.products);
       }
       if (err) {
-        console.log('yes!!!!!!!!!!!!!!');
-        this.products = data;
+        console.log(err);
       }
     }.bind(this));
   }

@@ -6,7 +6,8 @@
 
       <a href='#' class="btn btn-info cat" *ngIf='user._id==cur_user_id' (click)="adding($event)"><h3>+ POST AN ITEM</h3></a>
       <a href="#" class="btn btn-default"><h4>TOTAL OF ITEMS: {{products.length}}</h4></a>
-      <a href="#" class="btn btn-default"><h4>WISH LIST</h4></a>
+      <a href="#" (click)='showWishList()' class="btn btn-default" *ngIf='user.wishList && user.wishList.length>0'><h4>WISH LIST {{user.wishList.length}}</h4></a>
+      <a href="#" disabled class="btn btn-default" *ngIf='!user.wishList || user.wishList.length==0'><h4>Wish list is empty</h4></a>
     </div>
     <div class="col-md-12 shop-tab-container">
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 shop-tab-menu">
@@ -90,6 +91,7 @@
       <!-- List of products -->
       <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length>0'>
         <div class="col-md-3 col-sm-6" *ngFor='let p of products'>
+            <a  [routerLink]="['/product', p._id]">
           <span class="thumbnail">
             <img class='product-img' src={{p.images[0]}} alt="...">
             <h4>{{p.title}}</h4>
@@ -102,6 +104,7 @@
               </div>
             </div>
           </span>
+          </a>
         </div>
       </div>
       <!-- Product list END -->

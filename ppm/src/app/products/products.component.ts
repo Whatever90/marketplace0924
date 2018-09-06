@@ -11,52 +11,93 @@ import { TaskService } from '../task.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products = []
+  product_id;
+  product = null;
   user;
-  constructor(private _taskService: TaskService, private _r: Router) {
-    // this.checkUser()
+  cur_user = null;
+  wishListIncludes = false;
+  constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute) {
+    this._route.paramMap.subscribe(params => {
+      this.product_id = params.get('id');
+      this._taskService.findProduct(this.product_id, function (data, err) { // searching for a product by ID
+        if (data.name !== 'CastError') {
+          this.product = data;
+          this.findSeller(data.seller);
+          this.checkCurUser();
+        } else {
+          this._r.navigate(['/']);
+        }
+      }.bind(this));
+    });
+  }
+  findSeller(id) {
+    this._taskService.getUser(id, function (data, err) {
+      if (data) {
+        this.product.seller = data;
+      } else {
+        console.log(err);
+      }
+    }.bind(this));
+  }
+  checkCurUser() {
+    this._taskService.showUser(function (data, err) {
+      if (data) {
+        this.cur_user = data;
+        if (!this.cur_user.wishList) {
+          this.cur_user.wishList = [];
+        } else {
+          for (let i = 0; i < this.cur_user.wishList.length; i++) {
+            if (this.cur_user.wishList[i]._id === this.product._id) {
+              this.wishListIncludes = true;
+              break;
+            }
+          }
+        }
+
+      }
+      if (err) {
+        console.log(err);
+      }
+    }.bind(this));
+  }
+  contactSeller() {
+    if (!this.cur_user) {
+      this._r.navigate(['/login']);
+    }
+    let obj = {
+      product_id: this.product,
+      buyer_id: this.cur_user._id
+    }
+    this._taskService.findConversation(obj, function (data, err) {
+      if (data) {
+        console.log(data);
+      } else {
+        console.log(err);
+      }
+    })
 
   }
-  // checkUser() {
-  //   this._taskService.showUser(function (user, data) {
-  //     console.log('products.comp: user =>', user)
-  //     console.log('products.comp: data =>', data)
-  //     if (!user) {
-  //       console.log('no user found in session')
-  //       this._r.navigateByUrl('')
-  //     }
-  //     if (user) {
-  //       console.log(user)
-  //       this.user = user
-  //       console.log('alright, user is here!')
-  //       this.showAll()
-  //     }
-  //   }.bind(this))
-  // }
-  // logout() {
-  //   console.log('products. logout function')
-  //   this._taskService.logout()
-  //   this._r.navigateByUrl('')
-  // }
-  // showAll() {
-  //   this._taskService.showMe(function (err, data) {
-  //     console.log(data)
-  //     console.log('----------------------')
-  //     console.log(err)
-  //     if (err) {
-  //       console.log('somehow true statement is ERROR, lol')
-  //       console.log(err)
-  //       this.products = err
-  //     }
-  //     if (data) {
-  //       console.log('yes!!!!!!!!!!!!!!')
-  //       this.products = data
-  //     }
-  //   }.bind(this))
-  // }
+  addToWishList() {
+    if (!this.cur_user) {
+      this._r.navigate(['/login']);
+    } else {
+      let obj = {
+        id: this.cur_user._id,
+        product: this.product
+      };
+      this._taskService.addToWishList(obj, function (data, err) {
+        if (data) {
+          console.log(data);
+        } else {
+          console.log(err);
+        }
+      });
+
+    }
+
+  }
 
   ngOnInit() {
-    // this.checkUser()
   }
 
 }

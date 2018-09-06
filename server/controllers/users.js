@@ -68,13 +68,9 @@ module.exports = {
   },
 
   retrieve: function (req, res) {
-    console.log("a to tut?");
-    console.log(req.session);
     if (!req.session.user) {
-      console.log("nikogo");
       res.json(false);
     } else {
-      console.log(req.session.user);
       res.json(req.session.user);
     }
   },
@@ -82,6 +78,18 @@ module.exports = {
     req.session.destroy();
     console.log("destroyd!!!");
     res.status(200).send();
+  },
+  addToWishList: function (req, res) {
+    User.update({ _id: req.body.id }, {$push: { wishList: req.body.product }})
+      .then(data => {
+        if (data) {
+          req.session.user.wishList.push(req.body.product);
+          res.json(data)
+        } else {
+          console.log(err)
+          res.json(false)
+        }
+      })
   },
   // })
   // User.update({login: req.body.login}, {$set: {score: req.body.score}}, function(err, data){

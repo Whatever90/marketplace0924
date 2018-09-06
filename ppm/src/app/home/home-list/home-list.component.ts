@@ -71,6 +71,9 @@ export class HomeListComponent implements OnInit {
   adding_cancel() { // just canceling form
     this.adder = false;
   }
+  showWishList() {
+    console.log('show then your wish list, Carl');
+  }
   ngOnInit() {
     this._taskService.getUser(this.id, function (data, err) {
       console.log('searching');
