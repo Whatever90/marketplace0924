@@ -19,7 +19,7 @@ export class TaskService {
   constructor(private _r: Router, private _http: Http) {
 
   }
-// -=========User functions============-
+  // -=========User functions============-
   changeUserSession(u) {
     this.userSession.next(u);
   }
@@ -64,7 +64,7 @@ export class TaskService {
       .map(data => data.json())
       .subscribe(data => callback(data));
   }
-// -=========Product functions============-
+  // -=========Product functions============-
   newProduct(product, callback) {
     this._http.post('/products/new', product)
       .map(data => data.json())
@@ -106,12 +106,19 @@ export class TaskService {
       (err) => console.log(err)
     );
   }
-// Conversation, chats, messages, etc
-  findConversation(obj, callback) {
-    this._http.post('/conversations/find', obj).subscribe(
-      (data) => data = data.json(),
-      (err) => console.log(err)
-    );
+  // Conversation, chats, messages, etc
+  findConversation(obj, callback) { // Looking for a conversation by product and buyer IDs
+    this._http.post('/conversations/find', obj)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
+  }
+  findConversationById(id, callback) { // Looking for a conversation by product and buyer IDs
+    id = {
+      id: id
+    };
+    this._http.post('/conversations/findById', id)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
   }
   createConversation(obj, callback) {
     this._http.post('/conversations/create', obj).subscribe(
@@ -129,7 +136,7 @@ export class TaskService {
 
 
 
-// ADMIN FUNCTION++++++++++++++++++++++++++
+  // ADMIN FUNCTION++++++++++++++++++++++++++
   show(callback) {
     console.log('show all!');
     this._http.get('/users').subscribe(

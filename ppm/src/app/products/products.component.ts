@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import { TaskService } from '../task.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnInit {
   user;
   cur_user = null;
   wishListIncludes = false;
+  con_id = null;
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute) {
     this._route.paramMap.subscribe(params => {
       this.product_id = params.get('id');
@@ -65,16 +67,18 @@ export class ProductsComponent implements OnInit {
       this._r.navigate(['/login']);
     }
     let obj = {
-      product_id: this.product,
+      product: this.product,
       buyer_id: this.cur_user._id
     }
     this._taskService.findConversation(obj, function (data, err) {
       if (data) {
         console.log(data);
+        this.con_id = data._id;
+        this._r.navigateByUrl(`/conversation/` + this.con_id);
       } else {
         console.log(err);
       }
-    });
+    }.bind(this));
 
   }
   addToWishList() {

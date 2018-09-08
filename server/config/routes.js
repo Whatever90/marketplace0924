@@ -57,7 +57,10 @@ module.exports = function (app) {
 
   // CONVERSATIONS, CHATS, MESSAGES, ETC----------------------
   app.post('/conversations/find', (req, res, next) => {
-    conversation.findByID(req, res)
+    conversation.find(req, res)
+  });
+  app.post('/conversations/findById', (req, res, next) => {
+    conversation.findById(req, res)
   });
   app.post('/conversations/findForUser', (req, res, next) => {
     conversation.findByUser(req, res)

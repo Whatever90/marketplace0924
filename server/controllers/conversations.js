@@ -9,8 +9,18 @@ var Conversation = mongoose.model('Conversation');
 //console.log(User)
 module.exports = {
   findByUser: function (req, res) {
-    Conversation.find({ buyer_id: req.body.buyer_id})
+    Conversation.find({ buyer_id: req.body.buyer_id })
       .sort("-updatedAt")
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });//, function(err, data){
+
+  },
+  findById: function (req, res) {
+    Conversation.findOne({ _id: req.body.id })
       .then(data => {
         res.json(data);
       })
@@ -26,7 +36,6 @@ module.exports = {
       seller_id: req.body.seller_id,
       messages: []
     });
-
     conversation.save(function (data, err) {
       if (data) {
         res.json(data)
@@ -37,17 +46,28 @@ module.exports = {
 
 
   },
-  findById: function (req, res) {//searching a conversation by buyer_id and product_id
-    console.log(req.body)
-    console.log('------------=-=-=-=-=-=-=-=-=-=')
-    Conversation.find({ $and: [ { product_id: req.body.product_id }, { buyer_id: req.body.buyer_id } ] }, function(data, err){
-      if(data){
+  find: function (req, res) {//searching a conversation by buyer_id and product_id
+    Conversation.findOne({ $and: [{ product_id: req.body.product._id }, { buyer_id: req.body.buyer_id }] })//, function (data, err) {
+      .then(data => {
+        console.log("we found SOMETHING!", data)
         res.json(data)
-      }else{
-        console.log(err)
-        res.json(err)
-      }
-    })
+      })
+      .catch(err => {
+        var conversation = new Conversation({
+          product_id: req.body.product._id,
+          buyer_id: req.body.buyer_id,
+          seller_id: req.body.product.seller._id,
+          messages: []
+        });
+        conversation.save(function (d, e) {
+          if (d) {
+            console.log('data', d)
+            res.json(d)
+          } else {
+            console.log('err', e)
+            res.json(e)
+          }
+        });
+      })
   },
-
 }
