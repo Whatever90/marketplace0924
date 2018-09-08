@@ -1,14 +1,10 @@
 var mongoose = require('mongoose');
-//var Quote = mongoose.model('Quote');
 var user = require('./../controllers/users.js');
 var product = require('./../controllers/products.js')
 var session = require('express-session');
-// original code:
 var express = require('express')
-var path = require('path')
-//var app = express();
-// more new code:
-//app.use(session({secret: 'codingdojorocks'}));
+var path = require('path');
+var conversation = require('./../controllers/conversations.js')
 module.exports = function (app) {
 
   // USER FUNCTIONS------------------
@@ -59,6 +55,20 @@ module.exports = function (app) {
     product.delete(req, res)
   });
 
+  // CONVERSATIONS, CHATS, MESSAGES, ETC----------------------
+  app.post('/conversations/find', (req, res, next) => {
+    conversation.findByID(req, res)
+  });
+  app.post('/conversations/findForUser', (req, res, next) => {
+    conversation.findByUser(req, res)
+  });
+  app.post('/conversations/create', (req, res, next) => {
+    console.log("a new conversation", req.body)
+    conversation.create(req, res)
+  })
+  app.post('/conversations/update', (req, res, next) => {
+    conversation.update(req, res)
+  });
 
   ///////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////

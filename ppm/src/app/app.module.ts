@@ -15,10 +15,10 @@ import { PostsComponent } from './posts/posts.component';
 
 import { HomeListComponent } from './home/home-list/home-list.component';
 import { HomeNewComponent } from './home/home-new/home-new.component';
-import { ProductNewComponent } from './products/product-new/product-new.component';
-import { ProductMylistComponent } from './products/product-mylist/product-mylist.component';
+// import { ProductNewComponent } from './products/product-new/product-new.component';
+// import { ProductMylistComponent } from './products/product-mylist/product-mylist.component';
 
-import { ProductsAllComponent } from './products/products-all/products-all.component';
+// import { ProductsAllComponent } from './products/products-all/products-all.component';
 import { ConversationComponent } from './conversation/conversation.component';
 // import { Routes, RouterModule } from '@angular/router';
 
@@ -33,9 +33,9 @@ import { ConversationComponent } from './conversation/conversation.component';
     PostsComponent,
     HomeListComponent,
     HomeNewComponent,
-    ProductNewComponent,
-    ProductMylistComponent,
-    ProductsAllComponent,
+    // ProductNewComponent,
+    // ProductMylistComponent,
+    // ProductsAllComponent,
     ConversationComponent
   ],
   imports: [

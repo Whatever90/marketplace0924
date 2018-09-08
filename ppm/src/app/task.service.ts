@@ -108,7 +108,19 @@ export class TaskService {
   }
 // Conversation, chats, messages, etc
   findConversation(obj, callback) {
-    this._http.post('/conversation/find', obj).subscribe(
+    this._http.post('/conversations/find', obj).subscribe(
+      (data) => data = data.json(),
+      (err) => console.log(err)
+    );
+  }
+  createConversation(obj, callback) {
+    this._http.post('/conversations/create', obj).subscribe(
+      (data) => data = data.json(),
+      (err) => console.log(err)
+    );
+  }
+  updateConversation(obj, callback) {
+    this._http.post('/conversations/update', obj).subscribe(
       (data) => data = data.json(),
       (err) => console.log(err)
     );

@@ -74,7 +74,7 @@ export class ProductsComponent implements OnInit {
       } else {
         console.log(err);
       }
-    })
+    });
 
   }
   addToWishList() {

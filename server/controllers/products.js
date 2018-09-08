@@ -7,7 +7,6 @@ let temp = ''
 
 
 var Product = mongoose.model('Product');
-//console.log(User)
 module.exports = {
   showAll: function (req, res) {
     Product.find({}, function (err, data) {
@@ -28,7 +27,6 @@ module.exports = {
     })
   },
   create: function (req, res) {
-    console.log("++++++++++++++++++++++++++++++++++++")
     var product = new Product({
       title: req.body.title,
       price: req.body.price,

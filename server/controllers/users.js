@@ -46,7 +46,6 @@ module.exports = {
         if (data) {
           if (data.password == req.body.password) {
             req.session.user = data;
-            console.log("STORING USER IN SESSION! ", req.session);
             res.json(data)
           } else {
             res.json(false)
