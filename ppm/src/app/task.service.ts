@@ -132,6 +132,11 @@ export class TaskService {
       (err) => console.log(err)
     );
   }
+  sendMessage(obj, callback) {
+    this._http.post('/conversations/update', obj)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
+  }
 
 
 

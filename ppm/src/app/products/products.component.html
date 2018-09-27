@@ -1,49 +1,97 @@
 <div class="container" *ngIf='product'>
-		<div class="card">
-			<div class="container-fliud">
-				<div class="wrapper row">
-					<div class="preview col-md-6">
+  <div class="card">
+    <div class="container-fliud">
+      <div class="wrapper row">
+        <div class="preview col-md-6">
 
-						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
-						</div>
-						<ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						</ul>
+          <div class="preview-pic tab-content">
+            <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
+            <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
+            <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
+            <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
+            <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+          </div>
+          <ul class="preview-thumbnail nav nav-tabs">
+            <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+            <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+            <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+            <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+            <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+          </ul>
 
-					</div>
-					<div class="details col-md-6">
-						<h3 class="product-title">{{product.title}}</h3>
-						<p class="product-description">{{product.description}}</p>
-            <h4 class="price" *ngIf='product.price>0'>price: <span>${{product.price}}</span></h4>
-            <h4 class="price" *ngIf='product.price<1'><span style='color:green'>FREE</span></h4>
-            <h5>Location: {{product.location}}</h5>
-            <h5>Seller: <a  [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
-						<div class="action">
-              <button class="add-to-cart btn btn-default" (click)='contactSeller()'type="button">contact seller</button>
-              <span *ngIf='cur_user'>
-                <button [disabled]='wishListIncludes' class="like btn btn-default" type="button">
-                  <span class="fa fa-heart"></span>
-                  add to wishlist
-                </button>
+        </div>
+        <div class="details col-md-6">
+          <h3 class="product-title">{{product.title}}</h3>
+          <p class="product-description">{{product.description}}</p>
+          <h4 class="price" *ngIf='product.price>0'>price: <span>${{product.price}}</span></h4>
+          <h4 class="price" *ngIf='product.price<1'><span style='color:green'>FREE</span></h4>
+          <h5>Location: {{product.location}}</h5>
+          <h5>Seller: <a [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
+          <div class="action">
+            <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">contact seller</button>
+            <span *ngIf='cur_user'>
+              <button [disabled]='wishListIncludes' class="like btn btn-default" type="button">
+                <span class="fa fa-heart"></span>
+                add to wishlist
+              </button>
+            </span>
+            <span *ngIf='!cur_user'>
+              <button class="like btn btn-default" (click)='addToWishList()' type="button">
+                <span class="fa fa-heart"></span>
+                add to wishlist
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CHAT BOX -->
+  <div class="container-fliud" *ngIf='conversation'>
+    <div class="row" style='display: flex; width: 100%;'>
+      <div class="col-md-5" style='margin: 0px auto;'>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-comment"></span> Chat
+            <div class="btn-group pull-right">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+              </button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <ul class="chat">
+              <li class="left clearfix" *ngFor='let m of conversation.messages'>
+                <span *ngIf='m.sender_id===cur_user._id' class="chat-img pull-left">
+                  <img [src]="photo_buyer" alt="User Avatar" class="img-circle" />
+                </span>
+                <span *ngIf='m.sender_id!==cur_user._id' class="chat-img pull-left">
+                    <img [src]="photo_seller" alt="User Avatar" class="img-circle" />
+                  </span>
+                <div class="chat-body clearfix">
+                  <div class="header">
+                    <strong class="primary-font">{{m.sender_alias}}</strong> <small class="pull-right text-muted">
+                      <span class="glyphicon glyphicon-time"></span>{{m.date}}</small>
+                  </div>
+                  <p>
+                    {{m.message}}
+                    </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <div class="input-group">
+              <input id="btn-input" #message_box [(ngModel)]="message" required required type="text" class="form-control input-sm" placeholder="Type your message here..."
+              />
+              <span class="input-group-btn">
+                <button (click)='sendingMessage()' class="btn btn-warning btn-sm" id="btn-chat">
+                  Send</button>
               </span>
-							<span *ngIf='!cur_user'>
-                <button class="like btn btn-default" (click)='addToWishList()' type="button">
-                  <span class="fa fa-heart"></span>
-                  add to wishlist
-                </button>
-              </span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

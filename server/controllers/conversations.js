@@ -49,7 +49,6 @@ module.exports = {
   find: function (req, res) {//searching a conversation by buyer_id and product_id
     Conversation.findOne({ $and: [{ product_id: req.body.product._id }, { buyer_id: req.body.buyer_id }] })//, function (data, err) {
       .then(data => {
-        console.log("we found SOMETHING!", data)
         res.json(data)
       })
       .catch(err => {
@@ -70,4 +69,23 @@ module.exports = {
         });
       })
   },
+  update: function (req, res) {
+    let message = req.body;
+    message.date = Date.now();
+    Conversation.update({ _id: req.body.conversation_id }, { $push: { messages: message } }, function (e, d) {
+      if (d) {
+        console.log("updated!")
+        Conversation.findOne({ _id: req.body.conversation_id }, function (data, err) {
+          if (data) {
+            res.json(data)
+          } else {
+            res.json(err)
+          }
+        })
+      } else {
+        console.log("ERROR")
+        res.json(e)
+      }
+    })
+  }
 }

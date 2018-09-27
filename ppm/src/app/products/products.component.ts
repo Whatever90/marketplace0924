@@ -18,6 +18,10 @@ export class ProductsComponent implements OnInit {
   cur_user = null;
   wishListIncludes = false;
   con_id = null;
+  conversation = null;
+  message = '';
+  photo_buyer;
+  photo_seller;
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute) {
     this._route.paramMap.subscribe(params => {
       this.product_id = params.get('id');
@@ -62,6 +66,25 @@ export class ProductsComponent implements OnInit {
       }
     }.bind(this));
   }
+
+  addToWishList() {
+    if (!this.cur_user) {
+      this._r.navigate(['/login']);
+    } else {
+      let obj = {
+        id: this.cur_user._id,
+        product: this.product
+      };
+      this._taskService.addToWishList(obj, function (data, err) {
+        if (data) {
+          this.wishListIncludes = true;
+          console.log(data);
+        } else {
+          console.log(err);
+        }
+      });
+    }
+  }
   contactSeller() {
     if (!this.cur_user) {
       this._r.navigate(['/login']);
@@ -73,34 +96,36 @@ export class ProductsComponent implements OnInit {
     this._taskService.findConversation(obj, function (data, err) {
       if (data) {
         console.log(data);
-        this.con_id = data._id;
-        this._r.navigateByUrl(`/conversation/` + this.con_id);
+        this.conversation = data;
+        this.conversation.messages.reverse();
+        this.photo_buyer = 'http://placehold.it/50/55C1E7/fff&text=' + this.cur_user.alias[0];
+        this.photo_seller = 'http://placehold.it/50/55C1E7/fff&text=' + this.user.alias[0];
       } else {
         console.log(err);
       }
     }.bind(this));
-
   }
-  addToWishList() {
-    if (!this.cur_user) {
-      this._r.navigate(['/login']);
-    } else {
-      let obj = {
-        id: this.cur_user._id,
-        product: this.product
-      };
-      this._taskService.addToWishList(obj, function (data, err) {
-        if (data) {
-          console.log(data);
-        } else {
-          console.log(err);
-        }
-      });
 
+  sendingMessage() {
+    if (this.message.length < 1) {
+      return;
     }
-
+    let obj = {
+      message: this.message,
+      conversation_id: this.conversation._id,
+      sender_id: this.cur_user._id,
+      sender_alias: this.cur_user.alias,
+    };
+    this._taskService.sendMessage(obj, function (data, err) {
+      if (data) {
+        this.conversation = data;
+        this.conversation.messages.reverse();
+      } else {
+        console.log(err);
+      }
+    }.bind(this));
+    this.message = '';
   }
-
   ngOnInit() {
   }
 
