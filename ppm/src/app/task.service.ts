@@ -7,17 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 import 'rxjs/Rx';
 @Injectable()
 export class TaskService {
-  // context;
-  // answer;
   user;
-  // fighter1;
-  // fighter2;
   key = [];
   posts = [];
   private userSession = new BehaviorSubject(null);
   currentUserSession = this.userSession.asObservable();
   constructor(private _r: Router, private _http: Http) {
-
   }
   // -=========User functions============-
   changeUserSession(u) {
@@ -109,6 +104,11 @@ export class TaskService {
   // Conversation, chats, messages, etc
   findConversation(obj, callback) { // Looking for a conversation by product and buyer IDs
     this._http.post('/conversations/find', obj)
+      .map(data => data.json())
+      .subscribe(data => callback(data));
+  }
+  findAllConversations(id, callback) {
+    this._http.post('/conversations/findForUser', id)
       .map(data => data.json())
       .subscribe(data => callback(data));
   }

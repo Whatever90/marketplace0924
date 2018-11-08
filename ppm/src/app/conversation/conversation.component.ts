@@ -9,22 +9,28 @@ import { TaskService } from '../task.service';
   styleUrls: ['./conversation.component.css']
 })
 export class ConversationComponent implements OnInit {
-  conversation = null;
+  conversations = null;
   conversation_id = null;
+  cur_user;
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute) {
-    this._route.paramMap.subscribe(params => {
-      this.conversation_id = params.get('con_id');
-      this._taskService.findConversationById(this.conversation_id, function (data, err) { // searching for a product by ID
-        if (data.name !== 'CastError') {
-          this.conversation = data;
-          this.findSeller(data.seller_id);
-          this.checkCurUser();
-        } else {
-          this._r.navigate(['/']);
-        }
-      }.bind(this));
-    });
-   }
+    this._taskService.showUser(function (d, e) {
+      if (d) {
+        this.cur_user = d;
+        const obj = {
+          id: d._id
+        };
+        this._taskService.findAllConversations(obj, function (data, err) {
+          if (data) {
+            this.conversations = data;
+          } else {
+            console.log(err);
+          }
+        }.bind(this));
+      } else {
+        this._r.navigate(['/']);
+      }
+    }.bind(this));
+  }
 
   ngOnInit() {
   }

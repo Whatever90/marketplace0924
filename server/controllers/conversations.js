@@ -9,9 +9,11 @@ var Conversation = mongoose.model('Conversation');
 //console.log(User)
 module.exports = {
   findByUser: function (req, res) {
-    Conversation.find({ buyer_id: req.body.buyer_id })
-      .sort("-updatedAt")
+    console.log("testing");
+    Conversation.find({ buyer_id: req.body.id })
+      .sort("updatedAt")
       .then(data => {
+        console.log(data)
         res.json(data);
       })
       .catch(err => {

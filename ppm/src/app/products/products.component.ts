@@ -71,7 +71,7 @@ export class ProductsComponent implements OnInit {
     if (!this.cur_user) {
       this._r.navigate(['/login']);
     } else {
-      let obj = {
+      const obj = {
         id: this.cur_user._id,
         product: this.product
       };

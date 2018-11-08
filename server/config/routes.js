@@ -60,6 +60,7 @@ module.exports = function (app) {
     conversation.find(req, res)
   });
   app.post('/conversations/findById', (req, res, next) => {
+    console.log("SEARCHING BY ID", req.body)
     conversation.findById(req, res)
   });
   app.post('/conversations/findForUser', (req, res, next) => {

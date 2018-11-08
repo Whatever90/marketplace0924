@@ -31,8 +31,6 @@ export class NewComponent implements OnInit {
     console.log(this.user);
   }
   reg() {
-    console.log(this.user);
-    console.log('asd');
     this._taskService.create(this.user, function (data, err) {
       if (data) {
         this.errormessage = '';

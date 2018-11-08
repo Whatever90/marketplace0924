@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: 'login', component: NewComponent},
   { path: 'user/:id', component: HomeListComponent, pathMatch: 'full'  },
   { path: 'product/:id', component: ProductsComponent },
-  { path: 'conversation/:con_id', component: ConversationComponent},
+  { path: 'conversation', component: ConversationComponent},
 
-  { path: '**', component: DeleteComponent },
+  { path: '**', component: DeleteComponent }, // PAGE NOT FOUND
   // { path: 'players/addplayer', component: HomeNewComponent },
   // { path: 'players/delete/:id', component: HomeNewComponent },
 
