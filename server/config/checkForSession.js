@@ -4,5 +4,6 @@ module.exports = ( req, res, next ) => {
             username: null
         }
     }
+    var checker = req.session.user.subscribe(user => console.log("A suka, che to user pomenyalsya!!!!", user))
     next();
   }

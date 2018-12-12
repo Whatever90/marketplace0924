@@ -75,7 +75,7 @@ module.exports = {
   },
   logout: (req, res) => {
     req.session.destroy();
-    console.log("destroyd!!!");
+    console.log("You have logged out");
     res.status(200).send();
   },
   addToWishList: function (req, res) {
