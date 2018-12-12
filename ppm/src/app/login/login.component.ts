@@ -4,16 +4,16 @@ import { Subscription } from 'rxjs/Subscription';
 import {Location} from '@angular/common'
 import 'rxjs/add/operator/switchMap';
 import { TaskService } from '../task.service';
-import { User } from './../user';
-import { LoginUser } from './../loginUser';
+import { User } from '../user';
+import { LoginUser } from '../loginUser';
 
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class NewComponent implements OnInit {
+export class LoginComponent implements OnInit {
   users = [];
   user;
   loginUser = new LoginUser();

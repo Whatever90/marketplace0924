@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { TaskService } from './../../task.service';
-import { Product } from './../../product';
-import { HomeComponent } from './../home.component';
+import { TaskService } from './../task.service';
+import { Product } from './../product';
+
 @Component({
   selector: 'app-home-list',
   templateUrl: './home-list.component.html',
   styleUrls: ['./home-list.component.css']
 })
-export class HomeListComponent implements OnInit {
+export class UserComponent implements OnInit {
   user = null;
   products = [];
   id;

@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { EditComponent } from './edit/edit.component';
-import { NewComponent } from './new/new.component';
+import { LoginComponent } from './login/login.component';
 import { ProductsComponent } from './products/products.component';
 import { DeleteComponent } from './delete/delete.component';
-import { HomeListComponent } from './home/home-list/home-list.component';
+import { UserComponent } from './user/user.component';
 import { ConversationComponent } from './conversation/conversation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: NewComponent},
-  { path: 'user/:id', component: HomeListComponent, pathMatch: 'full'  },
+  { path: 'login', component: LoginComponent},
+  { path: 'user/:id', component: UserComponent, pathMatch: 'full'  },
   { path: 'product/:id', component: ProductsComponent },
   { path: 'conversation', component: ConversationComponent},
 

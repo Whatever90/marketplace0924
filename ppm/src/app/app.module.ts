@@ -8,12 +8,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { EditComponent } from './edit/edit.component';
-import { NewComponent } from './new/new.component';
+import { LoginComponent } from './login/login.component';
 import { TaskService } from './task.service';
 import { DeleteComponent } from './delete/delete.component';
-import { PostsComponent } from './posts/posts.component';
 
-import { HomeListComponent } from './home/home-list/home-list.component';
+import { UserComponent } from './user/user.component';
 import { HomeNewComponent } from './home/home-new/home-new.component';
 // import { ProductNewComponent } from './products/product-new/product-new.component';
 // import { ProductMylistComponent } from './products/product-mylist/product-mylist.component';
@@ -28,10 +27,9 @@ import { ConversationComponent } from './conversation/conversation.component';
     HomeComponent,
     ProductsComponent,
     EditComponent,
-    NewComponent,
+    LoginComponent,
     DeleteComponent,
-    PostsComponent,
-    HomeListComponent,
+    UserComponent,
     HomeNewComponent,
     // ProductNewComponent,
     // ProductMylistComponent,
