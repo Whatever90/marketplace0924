@@ -1,8 +1,9 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Product } from './product';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { PostsComponent } from './posts/posts.component';
 import { BehaviorSubject } from 'rxjs';
 import 'rxjs/Rx';
 @Injectable()
@@ -19,19 +20,19 @@ export class TaskService {
     this.userSession.next(u);
   }
   create(user, callback) {
-    this._http.post('/user/new', user)
-      .map(data => data.json()) //
+    this._http.post('/user/new', user).pipe(
+      map(data => data.json())) //
       .subscribe(data => callback(data));
   }
 
   login(user, callback) {
-    this._http.post('/user/login', user)
-      .map(data => data.json()) //
+    this._http.post('/user/login', user).pipe(
+      map(data => data.json())) //
       .subscribe(data => callback(data));
   }
   showUser(callback) { // get user from session
-    this._http.post('/user/showuser', 'lol')
-      .map(data => data.json()) //
+    this._http.post('/user/showuser', 'lol').pipe(
+      map(data => data.json())) //
       .subscribe(data => callback(data));
   }
   storeUs(user) {
@@ -50,27 +51,27 @@ export class TaskService {
     user = {
       user: user
     };
-    this._http.post('/user/contact', user)
-      .map(data => data.json())
+    this._http.post('/user/contact', user).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   addToWishList(obj, callback) {
-    this._http.post('/user/addToWishList', obj)
-      .map(data => data.json())
+    this._http.post('/user/addToWishList', obj).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   // -=========Product functions============-
   newProduct(product, callback) {
-    this._http.post('/products/new', product)
-      .map(data => data.json())
+    this._http.post('/products/new', product).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   findProduct(id, callback) {
     id = {
       id: id
     };
-    this._http.post('/products/find', id)
-      .map(data => data.json())
+    this._http.post('/products/find', id).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   updateProduct(product) {
@@ -80,16 +81,16 @@ export class TaskService {
     );
   }
   showMe(callback) {
-    this._http.post('/products/all', 'lol')
-      .map(data => data.json())
+    this._http.post('/products/all', 'lol').pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   showMylist(id, callback) {
     id = {
       id: id
     };
-    this._http.post('/products/mylist', id)
-      .map(data => data.json())
+    this._http.post('/products/mylist', id).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   deleteProduct(id) {
@@ -103,21 +104,21 @@ export class TaskService {
   }
   // Conversation, chats, messages, etc
   findConversation(obj, callback) { // Looking for a conversation by product and buyer IDs
-    this._http.post('/conversations/find', obj)
-      .map(data => data.json())
+    this._http.post('/conversations/find', obj).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   findAllConversations(id, callback) {
-    this._http.post('/conversations/findForUser', id)
-      .map(data => data.json())
+    this._http.post('/conversations/findForUser', id).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   findConversationById(id, callback) { // Looking for a conversation by product and buyer IDs
     id = {
       id: id
     };
-    this._http.post('/conversations/findById', id)
-      .map(data => data.json())
+    this._http.post('/conversations/findById', id).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
   createConversation(obj, callback) {
@@ -133,8 +134,8 @@ export class TaskService {
     );
   }
   sendMessage(obj, callback) {
-    this._http.post('/conversations/update', obj)
-      .map(data => data.json())
+    this._http.post('/conversations/update', obj).pipe(
+      map(data => data.json()))
       .subscribe(data => callback(data));
   }
 
@@ -154,8 +155,8 @@ export class TaskService {
   delete(id) {
     console.log(id);
     id = { id: id };
-    this._http.post('/user/delete/', id)
-      .map(data => data.json())
+    this._http.post('/user/delete/', id).pipe(
+      map(data => data.json()))
       .toPromise();
     console.log('did it work?');
 

@@ -66,8 +66,8 @@
                   <img [src]="photo_buyer" alt="User Avatar" class="img-circle" />
                 </span>
                 <span *ngIf='m.sender_id!==cur_user._id' class="chat-img pull-left">
-                    <img [src]="photo_seller" alt="User Avatar" class="img-circle" />
-                  </span>
+                  <img [src]="photo_seller" alt="User Avatar" class="img-circle" />
+                </span>
                 <div class="chat-body clearfix">
                   <div class="header">
                     <strong class="primary-font">{{m.sender_alias}}</strong> <small class="pull-right text-muted">
@@ -75,15 +75,15 @@
                   </div>
                   <p>
                     {{m.message}}
-                    </p>
+                  </p>
                 </div>
               </li>
             </ul>
           </div>
           <div class="panel-footer">
             <div class="input-group">
-              <input id="btn-input" #message_box [(ngModel)]="message" required required type="text" class="form-control input-sm" placeholder="Type your message here..."
-              />
+              <input id="btn-input" #message_box [(ngModel)]="message" required required type="text" class="form-control input-sm"
+                placeholder="Type your message here..." />
               <span class="input-group-btn">
                 <button (click)='sendingMessage()' class="btn btn-warning btn-sm" id="btn-chat">
                   Send</button>

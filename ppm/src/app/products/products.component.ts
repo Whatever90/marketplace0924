@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Anonpost } from '../anonpost';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
+import { Subscription } from 'rxjs';
+
 import { TaskService } from '../task.service';
 import { DOCUMENT } from '@angular/common';
 
@@ -94,15 +94,17 @@ export class ProductsComponent implements OnInit {
       buyer_id: this.cur_user._id
     }
     this._taskService.findConversation(obj, function (data, err) {
+      console.log("data =>", data);
+      console.log("err =>", err)
       if (data) {
         console.log(data);
         this.conversation = data;
         this.conversation.messages.reverse();
-        this.photo_buyer = 'http://placehold.it/50/55C1E7/fff&text=' + this.cur_user.alias[0];
-        this.photo_seller = 'http://placehold.it/50/55C1E7/fff&text=' + this.user.alias[0];
       } else {
-        console.log(err);
+        this.conversation = [];
       }
+      this.photo_buyer = 'http://placehold.it/50/55C1E7/fff&text=' + this.cur_user.alias[0];
+      this.photo_seller = 'http://placehold.it/50/55C1E7/fff&text=' + this.product.seller.alias[0];
     }.bind(this));
   }
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import 'rxjs/add/operator/switchMap';
+
 import { TaskService } from './task.service';
 import { Anonpost } from './anonpost';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

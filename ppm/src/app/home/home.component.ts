@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
+
 import { TaskService } from '../task.service';
-import { HomeListComponent } from './home-list/home-list.component';
 import { HomeNewComponent } from './home-new/home-new.component';
 import { User } from './../user';
 import { LoginUser } from './../loginUser';

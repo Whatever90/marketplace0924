@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
+import { Subscription } from 'rxjs';
+
 import { TaskService } from '../task.service';
 
 @Component({

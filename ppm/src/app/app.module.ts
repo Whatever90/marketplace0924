@@ -31,9 +31,6 @@ import { ConversationComponent } from './conversation/conversation.component';
     DeleteComponent,
     UserComponent,
     HomeNewComponent,
-    // ProductNewComponent,
-    // ProductMylistComponent,
-    // ProductsAllComponent,
     ConversationComponent
   ],
   imports: [
