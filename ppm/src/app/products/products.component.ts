@@ -96,10 +96,7 @@ export class ProductsComponent implements OnInit {
       buyer_id: this.cur_user._id
     }
     this._taskService.findConversation(obj, function (data, err) {
-      console.log("data =>", data);
-      console.log("err =>", err)
       if (data) {
-        console.log(data);
         this.conversation = data;
         this.conversation.messages.reverse();
       } else {
@@ -125,18 +122,23 @@ export class ProductsComponent implements OnInit {
     };
     console.log(obj)
     this._http.post('/conversations/update', obj).subscribe(
-      (data) => {data = data.json(); console.log("data => ",data)},
+      (data) => {
+        data = data.json();
+        console.log("data => ",data);
+        this.conversation = data;
+        this.conversation.messages.reverse();
+      },
       (err) => console.log("err => ", err)
     );
       
-    this._taskService.sendMessage(obj, function (data, err) {
-      if (data) {
-        this.conversation = data;
-        this.conversation.messages.reverse();
-      } else {
-        console.log(err);
-      }
-    }.bind(this));
+    // this._taskService.sendMessage(obj, function (data, err) {
+    //   if (data) {
+    //     this.conversation = data;
+    //     this.conversation.messages.reverse();
+    //   } else {
+    //     console.log(err);
+    //   }
+    // }.bind(this));
   }
   ngOnInit() {
   }

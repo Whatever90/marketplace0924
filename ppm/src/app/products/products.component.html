@@ -71,7 +71,7 @@
                 <div class="chat-body clearfix">
                   <div class="header">
                     <strong class="primary-font">{{m.sender_alias}}</strong> <small class="pull-right text-muted">
-                      <span class="glyphicon glyphicon-time"></span>{{m.date}}</small>
+                      <span class="glyphicon glyphicon-time"></span>{{m.date | date:'medium'}}</small>
                   </div>
                   <p>
                     {{m.message}}
