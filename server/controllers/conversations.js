@@ -74,20 +74,37 @@ module.exports = {
   update: function (req, res) {
     let message = req.body;
     message.date = Date.now();
-    Conversation.update({ _id: req.body.conversation_id }, { $push: { messages: message } }, function (e, d) {
-      if (d) {
-        console.log("updated!")
-        Conversation.findOne({ _id: req.body.conversation_id }, function (data, err) {
+      if(!message.conversation_id){
+        var conversation = new Conversation({
+          product_id: req.body.product_id,
+          buyer_id: req.body.sender_id,
+          seller_id: req.body.reciever_id,
+          messages: [message]
+        });
+        conversation.save(function (err, data) {
           if (data) {
             res.json(data)
           } else {
-            res.json(err)
+            console.log(err)
           }
         })
-      } else {
-        console.log("ERROR")
-        res.json(e)
+      }else{
+        Conversation.update({ _id: req.body.conversation_id }, { $push: { messages: message } }, function (e, d) {
+          if (d) {
+            console.log("updated!")
+            Conversation.findOne({ _id: req.body.conversation_id }, function (data, err) {
+              if (data) {
+                res.json(data)
+              } else {
+                res.json(err)
+              }
+            })
+          } else {
+            console.log("ERROR")
+            res.json(e)
+          }
+        });
       }
-    })
+    
   }
 }

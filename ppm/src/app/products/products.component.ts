@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Anonpost } from '../anonpost';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { Http } from '@angular/http';
 import { TaskService } from '../task.service';
 import { DOCUMENT } from '@angular/common';
 
@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   message = '';
   photo_buyer;
   photo_seller;
-  constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute) {
+  constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute, private _http: Http) {
     this._route.paramMap.subscribe(params => {
       this.product_id = params.get('id');
       this._taskService.findProduct(this.product_id, function (data, err) { // searching for a product by ID
@@ -85,6 +85,8 @@ export class ProductsComponent implements OnInit {
       });
     }
   }
+  
+  onEnter(value: string) { this.message = value }
   contactSeller() {
     if (!this.cur_user) {
       this._r.navigate(['/login']);
@@ -108,16 +110,25 @@ export class ProductsComponent implements OnInit {
     }.bind(this));
   }
 
-  sendingMessage() {
-    if (this.message.length < 1) {
+  sendingMessage(message) {
+    if(message.length<1){
       return;
     }
     let obj = {
-      message: this.message,
+      message: message,
       conversation_id: this.conversation._id,
       sender_id: this.cur_user._id,
       sender_alias: this.cur_user.alias,
+      reciever_id: this.product.seller._id,
+      reciever_alias: this.product.seller.alias,
+      product_id: this.product._id
     };
+    console.log(obj)
+    this._http.post('/conversations/update', obj).subscribe(
+      (data) => {data = data.json(); console.log("data => ",data)},
+      (err) => console.log("err => ", err)
+    );
+      
     this._taskService.sendMessage(obj, function (data, err) {
       if (data) {
         this.conversation = data;
@@ -126,7 +137,6 @@ export class ProductsComponent implements OnInit {
         console.log(err);
       }
     }.bind(this));
-    this.message = '';
   }
   ngOnInit() {
   }

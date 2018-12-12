@@ -82,10 +82,10 @@
           </div>
           <div class="panel-footer">
             <div class="input-group">
-              <input id="btn-input" #message_box [(ngModel)]="message" required required type="text" class="form-control input-sm"
+              <input id="btn-input" #message required type="text" class="form-control input-sm"
                 placeholder="Type your message here..." />
               <span class="input-group-btn">
-                <button (click)='sendingMessage()' class="btn btn-warning btn-sm" id="btn-chat">
+                <button (keyup.enter)="onEnter(message.value)" (click)="sendingMessage(message.value); message.value=''" class="btn btn-warning btn-sm" id="btn-chat">
                   Send</button>
               </span>
             </div>
