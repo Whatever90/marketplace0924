@@ -22,6 +22,7 @@ export class ConversationComponent implements OnInit {
         this._taskService.findAllConversations(obj, function (data, err) {
           if (data) {
             this.conversations = data;
+            console.log(this.conversations)
           } else {
             console.log(err);
           }
@@ -33,6 +34,10 @@ export class ConversationComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  activeConversation(conversation){
+    console.log("hey")
+    console.log(conversation)
   }
 
 }

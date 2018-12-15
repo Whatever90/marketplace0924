@@ -53,9 +53,9 @@
         <div class="panel panel-primary">
           <div class="panel-heading">
             <span class="glyphicon glyphicon-comment"></span> Chat
-            <div class="btn-group pull-right">
+            <div class="btn-group pull-right" (click)="conversation = false">
               <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-chevron-down"></span>
+                <span class="glyphicon glyphicon-chevron-down"   ></span>
               </button>
             </div>
           </div>
@@ -83,7 +83,7 @@
           <div class="panel-footer">
             <div class="input-group">
               <input id="btn-input" #message required type="text" class="form-control input-sm"
-                placeholder="Type your message here..." />
+                placeholder="Type your message here..."  autofocus/>
               <span class="input-group-btn">
                 <button (keyup.enter)="onEnter(message.value)" (click)="sendingMessage(message.value); message.value=''" class="btn btn-warning btn-sm" id="btn-chat">
                   Send</button>
