@@ -30,7 +30,8 @@
               </div>
             </div>
             <div class="inbox_chat">
-              <div class="chat_list active_chat">
+              <!-- CLICKED CHAT -->
+              <!-- <div class="chat_list active_chat">
                 <div class="chat_people">
                   <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                   <div class="chat_ib">
@@ -38,61 +39,24 @@
                     <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
                   </div>
                 </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              </div> -->
+              <!-- END OF CLICKED CHAT -->
+              <!-- <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
+                  {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+               </li> -->
+              <!-- LIST OF CHATS -->
+              <div class="chat_list" *ngFor='let conversation of conversations'>
+                <div class="chat_people" (click)='activeConversation(conversation)'> 
+                  <div class="chat_img"> <img src='http://placehold.it/50/55C1E7/fff&text=A' alt="sunil"> </div>
                   <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
+                    <h5>{{conversation.seller_id}} <span class="chat_date">{{conversation.messages[conversation.messages.length-1].date | date:'medium'}}</span></h5>
+                    <p>{{conversation.messages[conversation.messages.length-1].message}}</p>
                   </div>
                 </div>
               </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib">
-                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                    <p>Test, which is a new approach to have all solutions astrology under one roof.</p>
-                  </div>
-                </div>
-              </div>
+              
+              
+              <!-- END OF LIST OF CHATS -->
             </div>
           </div>
           <div class="mesgs">
