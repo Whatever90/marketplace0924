@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var fs = require('fs');
 var path = require('path');
-console.log('HEY, this is mongo')
+console.log('MongoDB is ready...')
 
 mongoose.connect('mongodb://localhost/marketplace');
 var models_path = path.join(__dirname, './../models');

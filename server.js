@@ -23,7 +23,9 @@ var routes_setter = require('./server/config/routes.js');
 routes_setter(app);
 mongoose.connect('mongodb://localhost/marketplace');
 app.listen(8000, function() {
-	console.log("rock'n'roll on port 8000");
+  console.log("-=-=-=-=-=-=-=                  -=-=-=-=-=-=--")
+  console.log("Welcome ot MarketPlace, comrade! Please go to localhost: 8000");
+  console.log("-=-=-=-=-=-=-=                  -=-=-=-=-=-=--")
 })
 
 
