@@ -1,11 +1,13 @@
-
 import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Product } from './product';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
-import { BehaviorSubject } from 'rxjs';
+import { Http,  } from '@angular/http';
+import { BehaviorSubject, ObservableInput } from 'rxjs';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import {HttpClient} from '@angular/common/http';
+
 @Injectable()
 export class TaskService {
   user;
@@ -13,9 +15,15 @@ export class TaskService {
   posts = [];
   private userSession = new BehaviorSubject(null);
   currentUserSession = this.userSession.asObservable();
-  constructor(private _r: Router, private _http: Http) {
+  constructor(private _r: Router, private _http: Http, private http: HttpClient ) { //, private http: HttpClient
   }
   // -=========User functions============-
+  getIp(){
+    this.http.get<{ip:string}>('https://jsonip.com')
+    .subscribe( data => {
+      return data.ip;
+    })
+  }
   changeUserSession(u) {
     this.userSession.next(u);
   }
@@ -26,6 +34,7 @@ export class TaskService {
   }
 
   login(user, callback) {
+    user.ip = this.getIp();
     this._http.post('/user/login', user).pipe(
       map(data => data.json())) //
       .subscribe(data => callback(data));
@@ -60,6 +69,9 @@ export class TaskService {
       map(data => data.json()))
       .subscribe(data => callback(data));
   }
+
+    
+  
   // -=========Product functions============-
   newProduct(product, callback) {
     this._http.post('/products/new', product).pipe(

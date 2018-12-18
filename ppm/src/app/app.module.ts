@@ -14,10 +14,8 @@ import { DeleteComponent } from './delete/delete.component';
 
 import { UserComponent } from './user/user.component';
 import { HomeNewComponent } from './home/home-new/home-new.component';
-// import { ProductNewComponent } from './products/product-new/product-new.component';
-// import { ProductMylistComponent } from './products/product-mylist/product-mylist.component';
 
-// import { ProductsAllComponent } from './products/products-all/products-all.component';
+import { HttpClientModule } from '@angular/common/http';
 import { ConversationComponent } from './conversation/conversation.component';
 // import { Routes, RouterModule } from '@angular/router';
 
@@ -37,7 +35,8 @@ import { ConversationComponent } from './conversation/conversation.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
   }
   log() {
     this._taskService.login(this.loginUser, function (data, err) {
-      console.log(data);
-      console.log(err);
+      // console.log(data);
+      // console.log(err);
       if (data) {
         this.errormessage = '';
         this._taskService.changeUserSession(data);

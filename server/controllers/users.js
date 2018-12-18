@@ -41,11 +41,13 @@ module.exports = {
       })
   },
   login: function (req, res) {
+    console.log(req.body)
     User.findOne({ email: req.body.email })
       .then(data => {
         if (data) {
           if (data.password == req.body.password) {
             req.session.user = data;
+
             res.json(data)
           } else {
             res.json(false)
