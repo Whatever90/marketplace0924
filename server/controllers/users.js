@@ -41,14 +41,12 @@ module.exports = {
       })
   },
   login: function (req, res) {
-    console.log(req.body)
     User.findOne({ email: req.body.email })
       .then(data => {
         if (data) {
           if (data.password == req.body.password) {
             req.session.user = data;
-
-            res.json(data)
+            User.update({ email: req.body.email }, { $push: { ipList:req.body.ip } }).then(res.json(data))
           } else {
             res.json(false)
           }
@@ -81,7 +79,7 @@ module.exports = {
     res.status(200).send();
   },
   addToWishList: function (req, res) {
-    User.update({ _id: req.body.id }, {$push: { wishList: req.body.product }})
+    User.update({ _id: req.body.id }, { $push: { wishList: req.body.product } })
       .then(data => {
         if (data) {
           req.session.user.wishList.push(req.body.product);

@@ -4,7 +4,7 @@ var userSchema = new mongoose.Schema({
     email:  { type: String, required: [true, 'email is required'], minlength: [2, 'email IS TOO SHORT']},
     password:  { type: String, required: [true, 'password is required'], minlength: [2, 'password IS TOO SHORT']},
     wishList: { type: Array },
-    ip: {type: Array}
+    ipList: {type: Array}
 }, {timestamps: true });
 
 var User = mongoose.model('User', userSchema);
