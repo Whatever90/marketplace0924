@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import {Location} from '@angular/common'
-
+import { Location } from '@angular/common'
+import {HttpClient} from '@angular/common/http';
 import { TaskService } from '../task.service';
 import { User } from '../user';
 import { LoginUser } from '../loginUser';
@@ -23,12 +23,11 @@ export class LoginComponent implements OnInit {
   product;
   length;
   switch = true;
-  constructor(private _location: Location, private _route: ActivatedRoute, private _taskService: TaskService, private _r: Router) {
+  constructor(private _location: Location, private _route: ActivatedRoute, private _taskService: TaskService, private _r: Router, private http: HttpClient) {
     this.user = new User();
   }
   switcher() {
     this.switch = !this.switch;
-    console.log(this.user);
   }
   reg() {
     this._taskService.create(this.user, function (data, err) {
@@ -67,5 +66,12 @@ export class LoginComponent implements OnInit {
     this._taskService.storeUs(user);
   }
   ngOnInit() {
+    console.log("let's get IP")
+    this.http.get<{ ip: string }>('https://jsonip.com')
+      .subscribe(data => {
+        this.user.ip = data.ip;
+        this.loginUser.ip = data.ip;
+        console.log(this.loginUser)
+    })
   }
 }

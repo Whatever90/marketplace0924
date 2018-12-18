@@ -18,12 +18,7 @@ export class TaskService {
   constructor(private _r: Router, private _http: Http, private http: HttpClient ) { //, private http: HttpClient
   }
   // -=========User functions============-
-  getIp(){
-    this.http.get<{ip:string}>('https://jsonip.com')
-    .subscribe( data => {
-      return data.ip;
-    })
-  }
+  
   changeUserSession(u) {
     this.userSession.next(u);
   }
@@ -34,7 +29,7 @@ export class TaskService {
   }
 
   login(user, callback) {
-    user.ip = this.getIp();
+    console.log(user)
     this._http.post('/user/login', user).pipe(
       map(data => data.json())) //
       .subscribe(data => callback(data));

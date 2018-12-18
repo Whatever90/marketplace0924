@@ -28,7 +28,6 @@ export class AppComponent {
         console.log(data);
         this.user = data;
       } else {
-        console.log(err);
         console.log('seems like there is no one');
       }
     }.bind(this));
