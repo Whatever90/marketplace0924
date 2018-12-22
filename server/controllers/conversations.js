@@ -8,11 +8,13 @@ let temp = ''
 var Conversation = mongoose.model('Conversation');
 //console.log(User)
 module.exports = {
+  
   findByUser: function (req, res) {
-    console.log("testing");
-    Conversation.find({ buyer_id: req.body.id })
+    console.log("get all conversation for user", req.body.id)
+    Conversation.find({ $or: [ { buyer_id: req.body.id }, { seller_id: req.body.id } ] }) 
       .sort("updatedAt")
       .then(data => {
+        console.log("WE FOUND SOME CONVERSATION!")
         console.log(data)
         res.json(data);
       })

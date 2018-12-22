@@ -12,6 +12,7 @@ export class ConversationComponent implements OnInit {
   conversations = null;
   conversation_id = null;
   cur_user;
+  active_conversation = null;
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute) {
     this._taskService.showUser(function (d, e) {
       if (d) {
@@ -22,7 +23,7 @@ export class ConversationComponent implements OnInit {
         this._taskService.findAllConversations(obj, function (data, err) {
           if (data) {
             this.conversations = data;
-            console.log(this.conversations)
+            this.active_conversation = this.conversations[0];
           } else {
             console.log(err);
           }
@@ -36,8 +37,8 @@ export class ConversationComponent implements OnInit {
   ngOnInit() {
   }
   activeConversation(conversation){
-    console.log("hey")
-    console.log(conversation)
+    this.active_conversation = conversation;
+    console.log(this.active_conversation)
   }
 
 }

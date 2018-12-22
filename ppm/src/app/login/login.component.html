@@ -7,46 +7,49 @@
     <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Please sign up for MarketPlace <small style="color: greenyellow">It's free!</small></h3>
+          <h3 class="panel-title">Please sign up for MarketPlace <span style="color: #54b400">It's free!</span></h3>
         </div>
         <div class="panel-body">
           <form name='regForm' (submit)="reg()" #regForm="ngForm">
             <div class="form-group">
               <input type="text" name="alias" id="alias" required minlength="3" maxlength="24" [(ngModel)]="user.alias" #alias='ngModel'
                 class="form-control input-sm" placeholder="Alias">
-              <strong *ngIf='alias.valid && ( alias.dirty || alias.touched)'><span style="color: green">
-                  Looks good!</span></strong>
-              <strong *ngIf='alias.invalid && ( alias.dirty || alias.touched)'><span style="color: red"> Alias must be at
-                  least 3 characters long</span></strong>
+              <span *ngIf='alias.valid && ( alias.dirty || alias.touched)'><span style="color: green">
+                  Looks good!</span></span>
+              <span *ngIf='alias.invalid && ( alias.dirty || alias.touched)'><span style="color: red"> Alias must be at
+                  least 3 characters long</span></span>
             </div>
             <div class="form-group">
               <input type="text" name="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="user.email" #email='ngModel'
-                class="form-control input-sm" placeholder="E-mail"><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span
-                  style="color: red"> Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span
-                  style="color: green"> Looks good!</span></strong>
+                class="form-control input-sm" placeholder="E-mail"><span *ngIf='email.invalid && ( email.dirty || email.touched)'><span
+                  style="color: red"> Uphold Email format</span></span><span *ngIf='email.valid && ( email.dirty || email.touched)'><span
+                  style="color: green"> Looks good!</span></span>
             </div>
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                   <input type="password" type="password" name="password" required minlength="5" maxlength="24" [(ngModel)]="user.password"
-                    #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><strong
+                    #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><span
                     *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
-                      Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span
-                      style="color: green">Looks Good!</span></strong>
+                      Password name must be 5 characters long. </span></span><span *ngIf='password.valid && ( password.dirty || password.touched)'><span
+                      style="color: green">Looks Good!</span></span>
                 </div>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                   <input type="password" [(ngModel)]="user.con_password" #con_password='ngModel' type="password" name="con_password" required
-                    id="con_password" class="form-control input-sm" placeholder="Confirm Password"><span
-                    *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'><span style="color: red">Too
-                      short! Read above, dude!</span></span><div class="container" *ngIf='user!=null'>
-                    <strong *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'><span
-                        style="color: red">Password and confirmation have to match</span></strong>
-                    <strong *ngIf='con_password.value == password.value && password.valid'><span style="color: green">Looks
-                        Good!
-                      </span></strong>
-                  </div>
+                    id="con_password" class="form-control input-sm" placeholder="Confirm Password">
+                    <span *ngIf='password.invalid && ( con_password.dirty || con_password.touched)'>
+                      <span style="color: red">Too short! Read above, dude!</span>
+                    </span>
+                    <span *ngIf='user!=null'>
+                      <span *ngIf='con_password.value != password.value && password.valid && ( con_password.dirty || con_password.touched)'>
+                        <span style="color: red">Password and confirmation have to match</span>
+                      </span>
+                      <!-- <span *ngIf='con_password.value == password.value && password.valid'>
+                        <span style="color: green">Looks good!</span>
+                      </span> -->
+                    </span>
                 </div>
               </div>
               </div>
@@ -71,16 +74,16 @@
             <form name='logForm' (submit)="log()" #logForm="ngForm">
               <div class="form-group">
                 <input type="text" name="email" #email='ngModel' required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="loginUser.email"
-                  #email='ngModel' class="form-control input-sm" placeholder="E-mail"><strong *ngIf='email.invalid && ( email.dirty || email.touched)'><span
-                    style="color: red"> Uphold Email format</span></strong><strong *ngIf='email.valid && ( email.dirty || email.touched)'><span
-                    style="color: green"> Looks good!</span></strong>
+                  #email='ngModel' class="form-control input-sm" placeholder="E-mail"><span *ngIf='email.invalid && ( email.dirty || email.touched)'><span
+                    style="color: red"> Uphold Email format</span></span><span *ngIf='email.valid && ( email.dirty || email.touched)'><span
+                    style="color: green"> Looks good!</span></span>
               </div>
               <div class="form-group">
                 <input type="password" type="password" name="password" required minlength="5" maxlength="24" [(ngModel)]="loginUser.password"
-                  #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><strong
+                  #password='ngModel' id="password" class="form-control input-sm" placeholder="Password"><span
                   *ngIf='password.invalid && ( password.dirty || password.touched)'><span style="color: red">
-                    Password name must be 5 characters long. </span></strong><strong *ngIf='password.valid && ( password.dirty || password.touched)'><span
-                    style="color: green">Looks Good!</span></strong>
+                    Password name must be 5 characters long. </span></span><span *ngIf='password.valid && ( password.dirty || password.touched)'><span
+                    style="color: green">Looks Good!</span></span>
               </div>
               <input type="submit" value="Login" [disabled]="logForm.invalid" class="btn btn-info btn-block">
               <button (click)="switcher()" class="btn btn-primary btn-block">Registration</button>
