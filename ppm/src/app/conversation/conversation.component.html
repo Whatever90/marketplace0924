@@ -33,9 +33,9 @@
               <!-- LIST OF CHATS -->
               <div class="chat_list" *ngFor='let conversation of conversations'>
                 <div class="chat_people" (click)='activeConversation(conversation)'> 
-                  <div class="chat_img"> <img src='http://placehold.it/50/55C1E7/fff&text=A' alt="sunil"> </div>
+                  <div class="chat_img"> <img src='http://placehold.it/50/55C1E7/fff&text={{{{conversation.sender_alias[0]}}}}' alt="sunil"> </div>
                   <div class="chat_ib">
-                    <h5>{{conversation.seller_id}} <span class="chat_date">{{conversation.messages[conversation.messages.length-1].date | date:'medium'}}</span></h5>
+                    <h5>{{conversation.sender_alias}} <span class="chat_date">{{conversation.messages[conversation.messages.length-1].date | date:'medium'}}</span></h5>
                     <p>{{conversation.messages[conversation.messages.length-1].message}}</p>
                   </div>
                 </div>
@@ -46,7 +46,6 @@
             </div>
           </div>
           <div>
-            <h2>TEST</h2>
           </div>
           
           <div class="mesgs" >
@@ -76,8 +75,8 @@
             <!-- SEND MESSAGE INPUT -->
             <div class="type_msg">
               <div class="input_msg_write">
-                <input type="text" class="write_msg" placeholder="Type a message" />
-                <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                <input type="text" class="write_msg" #message placeholder="Type a message" autofocus/>
+                <button class="msg_send_btn" (click)="sendingMessage(message.value); message.value=''" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
               </div>
             </div>
             <!--  -->

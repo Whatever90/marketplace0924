@@ -79,8 +79,10 @@ module.exports = {
       if(!message.conversation_id){
         var conversation = new Conversation({
           product_id: req.body.product_id,
-          buyer_id: req.body.sender_id,
-          seller_id: req.body.reciever_id,
+          sender_id: req.body.sender_id,
+          sender_alias: req.body.sender_alias,
+          reciever_id: req.body.reciever_id,
+          reciever_alias: req.body.reciever_alias,
           messages: [message]
         });
         conversation.save(function (err, data) {

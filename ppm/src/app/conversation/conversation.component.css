@@ -128,7 +128,10 @@ img{ max-width:100%;}
   width: 100%;
 }
 
-.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.type_msg {
+  /* border-top: 1px solid rgba(16, 134, 245, 0.1); */
+  position: relative;
+}
 .msg_send_btn {
   background: #05728f none repeat scroll 0 0;
   border: medium none;
@@ -147,3 +150,6 @@ img{ max-width:100%;}
   height: 516px;
   overflow-y: auto;
 }
+.write_msg:active{
+  border:none !important;
+} 
