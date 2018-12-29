@@ -3,7 +3,6 @@
     <div class="container-fliud">
       <div class="wrapper row">
         <div class="preview col-md-6">
-
           <div class="preview-pic tab-content">
             <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
             <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
@@ -21,31 +20,48 @@
 
         </div>
         <div class="details col-md-6">
-          <h3 class="product-title">{{product.title}}</h3>
-          <p class="product-description">{{product.description}}</p>
-          <h4 class="price" *ngIf='product.price>0'>price: <span>${{product.price}}</span></h4>
-          <h4 class="price" *ngIf='product.price<1'><span style='color:green'>FREE</span></h4>
-          <h5>Location: {{product.location}}</h5>
+          <p class="product-title" style="font-size: 21.7333px;" *ngIf='!edit_sold_menu_status'>{{product.title}}</p> <textarea *ngIf='edit_sold_menu_status' rows="1" class="product-title" style="font-size: 21.7333px;" placeholder='Title'>{{product.title}}</textarea>
+          <p class="product-description" *ngIf='!edit_sold_menu_status'>{{product.description}}</p> <textarea *ngIf='edit_sold_menu_status' rows="1"  placeholed='Description'>{{product.description}}</textarea>
+          <p style="font-size: 18px;" *ngIf='!edit_sold_menu_status'>
+              <span *ngIf='product.price>0'>${{product.price}}</span>
+              <span *ngIf='product.price<1' style='color:green'>FREE</span>
+          </p>
+          <input type='number' *ngIf='edit_sold_menu_status' style='width: 100px' min="0" placeholed='Price' value={{product.price}}>
+
+          <p class="product-description" style="font-size: 17;" >Location Zip Code: 
+            <span *ngIf='!edit_sold_menu_status' >
+              {{product.location}}
+            </span>
+            <input type='number' pattern="[0-9]{5}" *ngIf='edit_sold_menu_status' max='99999' style='width: 100px' placeholed='Zipcode' value={{product.location}}>
+          </p> 
           <h5>Seller: <a [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
-          <div class="action">
-            <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">contact seller</button>
-            <span *ngIf='cur_user'>
-              <button [disabled]='wishListIncludes' class="like btn btn-default" type="button">
-                <span class="fa fa-heart"></span>
-                add to wishlist
-              </button>
-            </span>
-            <span *ngIf='!cur_user'>
-              <button class="like btn btn-default" (click)='addToWishList()' type="button">
-                <span class="fa fa-heart"></span>
-                add to wishlist
-              </button>
-            </span>
+          <div *ngIf='cur_user'>
+            <div class="action" *ngIf='cur_user._id!=product.seller._id'>
+              <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">contact seller</button>
+              <span *ngIf='cur_user'>
+                <button [disabled]='wishListIncludes' class="like btn btn-default" type="button">
+                  <span class="fa fa-heart"></span>
+                  add to wishlist
+                </button>
+              </span>
+              <span *ngIf='!cur_user'>
+                <button class="like btn btn-default" (click)='addToWishList()' type="button">
+                  <span class="fa fa-heart"></span>
+                  add to wishlist
+                </button>
+              </span>
+            </div>
+            <div class="action" *ngIf='cur_user._id==product.seller._id'>
+              <button type='button' class="btn btn-success" (click)='this.edit_sold_menu()'>Edit/Sold</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- EDIT SECTION -->
+
+
   <!-- CHAT BOX -->
   <div class="container-fliud" *ngIf='conversation'>
     <div class="row" style='display: flex; width: 100%;'>
@@ -55,7 +71,7 @@
             <span class="glyphicon glyphicon-comment"></span> Chat
             <div class="btn-group pull-right" (click)="conversation = false">
               <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-chevron-down"   ></span>
+                <span class="glyphicon glyphicon-chevron-down"></span>
               </button>
             </div>
           </div>
@@ -82,10 +98,11 @@
           </div>
           <div class="panel-footer">
             <div class="input-group">
-              <input id="btn-input" #message required type="text" class="form-control input-sm"
-                placeholder="Type your message here..."  autofocus/>
+              <input id="btn-input" #message required type="text" class="form-control input-sm" placeholder="Type your message here..."
+                autofocus />
               <span class="input-group-btn">
-                <button (keyup.enter)="onEnter(message.value)" (click)="sendingMessage(message.value); message.value=''" class="btn btn-warning btn-sm" id="btn-chat">
+                <button (keyup.enter)="onEnter(message.value)" (click)="sendingMessage(message.value); message.value=''"
+                  class="btn btn-warning btn-sm" id="btn-chat">
                   Send</button>
               </span>
             </div>

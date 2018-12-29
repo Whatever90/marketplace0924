@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit {
   message = '';
   photo_buyer;
   photo_seller;
+  edit_sold_menu_status = false;
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute, private _http: Http) {
     this._route.paramMap.subscribe(params => {
       this.product_id = params.get('id');
@@ -130,15 +131,13 @@ export class ProductsComponent implements OnInit {
       },
       (err) => console.log("err => ", err)
     );
-      
-    // this._taskService.sendMessage(obj, function (data, err) {
-    //   if (data) {
-    //     this.conversation = data;
-    //     this.conversation.messages.reverse();
-    //   } else {
-    //     console.log(err);
-    //   }
-    // }.bind(this));
+  }
+  edit_sold_menu(){
+    if(this.edit_sold_menu_status){
+      this.edit_sold_menu_status = false;
+    }else{
+      this.edit_sold_menu_status = true;
+    }
   }
   ngOnInit() {
   }
