@@ -223,7 +223,6 @@ textarea {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-
   resize: none; /*remove the resize handle on the bottom right*/
 }
 input {
@@ -234,7 +233,7 @@ input {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-
+  padding: 0px 0px;
   resize: none; /*remove the resize handle on the bottom right*/
 }
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
