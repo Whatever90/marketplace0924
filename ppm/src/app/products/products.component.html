@@ -33,7 +33,6 @@
             <input type='number' pattern="[0-9]{5}" [disabled]='!edit_sold_menu_status' max='99999' style='width: 100px'
               placeholed='Zipcode' value={{product.location}}>
           </p> 
-          
           <h5>Seller: <a [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
           <div *ngIf='cur_user'>
             <div class="action" *ngIf='cur_user._id!=product.seller._id'>
