@@ -10,10 +10,10 @@ import { ConversationComponent } from './conversation/conversation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent},
-  { path: 'user/:id', component: UserComponent, pathMatch: 'full'  },
+  { path: 'login', component: LoginComponent },
+  { path: 'user/:id', component: UserComponent, pathMatch: 'full' },
   { path: 'product/:id', component: ProductsComponent },
-  { path: 'conversation', component: ConversationComponent},
+  { path: 'conversation', component: ConversationComponent },
 
   { path: '**', component: DeleteComponent }, // PAGE NOT FOUND
   // { path: 'players/addplayer', component: HomeNewComponent },

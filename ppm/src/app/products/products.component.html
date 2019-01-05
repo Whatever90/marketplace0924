@@ -27,12 +27,13 @@
               <span *ngIf='product.price>0'><input disabled value={{product.price}}></span>
               <span *ngIf='product.price<1'><input disabled style='width: 100px; color:green' value="FREE"></span>
             </span>
-            <input type='number' *ngIf='edit_sold_menu_status && true' style='width: 100px' min="0" placeholed='Price' value={{product.price}}>
+            <input type='number' *ngIf='edit_sold_menu_status && true' style='width: 100px' min="0" placeholed='Price'
+              value={{product.price}}>
           </p>
           <p class="product-description" style="font-size: 17;">Location Zip Code:
             <input type='number' pattern="[0-9]{5}" [disabled]='!edit_sold_menu_status' max='99999' style='width: 100px'
               placeholed='Zipcode' value={{product.location}}>
-          </p> 
+          </p>
           <h5>Seller: <a [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
           <div *ngIf='cur_user'>
             <div class="action" *ngIf='cur_user._id!=product.seller._id'>

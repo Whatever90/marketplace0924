@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
     this._taskService.getUser(this.id, function (data, err) {
       if (data) {
         this.user = data;
-        this._taskService.showMylist(this.user._id, function(d, e){
+        this._taskService.showMylist(this.user._id, function (d, e) {
           if (d) {
             this.products = d;
           } else {
@@ -57,7 +57,7 @@ export class UserComponent implements OnInit {
         this.product.images.push('https://source.unsplash.com/collection/1163637/480x480');
       }
     }
-    this._taskService.newProduct(this.product, function(data, err){
+    this._taskService.newProduct(this.product, function (data, err) {
       if (data) {
         console.log(data);
       } else {

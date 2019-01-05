@@ -86,7 +86,7 @@ export class ProductsComponent implements OnInit {
       });
     }
   }
-  
+
   onEnter(value: string) { this.message = value }
   contactSeller() {
     if (!this.cur_user) {
@@ -109,7 +109,7 @@ export class ProductsComponent implements OnInit {
   }
 
   sendingMessage(message) {
-    if(message.length<1){
+    if (message.length < 1) {
       return;
     }
     let obj = {
@@ -125,17 +125,17 @@ export class ProductsComponent implements OnInit {
     this._http.post('/conversations/update', obj).subscribe(
       (data) => {
         data = data.json();
-        console.log("data => ",data);
+        console.log("data => ", data);
         this.conversation = data;
         this.conversation.messages.reverse();
       },
       (err) => console.log("err => ", err)
     );
   }
-  edit_sold_menu(){
-    if(this.edit_sold_menu_status){
+  edit_sold_menu() {
+    if (this.edit_sold_menu_status) {
       this.edit_sold_menu_status = false;
-    }else{
+    } else {
       this.edit_sold_menu_status = true;
     }
   }
