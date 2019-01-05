@@ -5,5 +5,5 @@ export class User {
     public password: string = '',
     public con_password: string = '',
     public ip: string = ''
-  ) {}
+  ) { }
 }

@@ -5,7 +5,7 @@ export class updateProduct {
     public description: string = "",
     public location: string = "",
     public image: string = "",
-    public seller: string ="",
-    public id: string =""
-  ){}
+    public seller: string = "",
+    public id: string = ""
+  ) { }
 }
