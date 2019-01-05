@@ -1,12 +1,12 @@
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http,  } from '@angular/http';
+import { Http, } from '@angular/http';
 import { BehaviorSubject, ObservableInput } from 'rxjs';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class TaskService {
@@ -15,10 +15,10 @@ export class TaskService {
   posts = [];
   private userSession = new BehaviorSubject(null);
   currentUserSession = this.userSession.asObservable();
-  constructor(private _r: Router, private _http: Http, private http: HttpClient ) { //, private http: HttpClient
+  constructor(private _r: Router, private _http: Http, private http: HttpClient) { //, private http: HttpClient
   }
   // -=========User functions============-
-  
+
   changeUserSession(u) {
     this.userSession.next(u);
   }
@@ -65,8 +65,8 @@ export class TaskService {
       .subscribe(data => callback(data));
   }
 
-    
-  
+
+
   // -=========Product functions============-
   newProduct(product, callback) {
     this._http.post('/products/new', product).pipe(
@@ -109,7 +109,7 @@ export class TaskService {
       (err) => console.log(err)
     );
   }
-  
+
   // Conversation, chats, messages, etc
   findConversation(obj, callback) { // Looking for a conversation by product and buyer IDs
     this._http.post('/conversations/find', obj).pipe(
