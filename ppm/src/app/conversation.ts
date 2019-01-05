@@ -4,5 +4,5 @@ export class Conversation {
     public buyer_id: string = '',
     public seller_id: string = '',
     public messages: string[] = [],
-  ) {}
+  ) { }
 }

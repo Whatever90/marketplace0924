@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent {
   title = 'app';
-  posts = [];
   post = new Anonpost();
   list;
   errors = [];
@@ -23,7 +22,7 @@ export class AppComponent {
     this.checkUser();
   }
   checkUser() {
-    this._taskService.showUser(function(data, err){
+    this._taskService.showUser(function (data, err) {
       if (data) {
         console.log(data);
         this.user = data;
