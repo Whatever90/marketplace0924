@@ -2,10 +2,18 @@
   <div class="row">
 
     <div class="btn-group btn-group-justified">
-      <a href="#" class="btn btn-info cat"><h4><i class="fa fa-bars" aria-hidden="true"></i> CATEGORIES</h4></a>
-      <a href="#" class="btn btn-default"><h4>ABOUT</h4></a>
-      <a href="#" class="btn btn-default"><h4>RETURNS</h4></a>
-      <a href="#" class="btn btn-default"><h4>DELIVERY</h4></a>
+      <a href="#" class="btn btn-info cat">
+        <h4><i class="fa fa-bars" aria-hidden="true"></i> CATEGORIES</h4>
+      </a>
+      <a href="#" class="btn btn-default">
+        <h4>ABOUT</h4>
+      </a>
+      <a href="#" class="btn btn-default">
+        <h4>RETURNS</h4>
+      </a>
+      <a href="#" class="btn btn-default">
+        <h4>DELIVERY</h4>
+      </a>
     </div>
 
     <div class="col-md-12 shop-tab-container">
@@ -37,19 +45,19 @@
       <!-- Product list START -->
       <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='products.length>0'>
         <div class="col-md-3 col-sm-6" *ngFor='let p of products'>
-            <a  [routerLink]="['/product', p._id]">
-          <span class="thumbnail">
-            <img class='product-img' src={{p.images[0]}} alt="...">
-            <h4>{{p.title}}</h4>
-            <p class='product-description'>{{p.description}}</p>
-            <hr class="line">
-            <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
-                <p class="price" *ngIf='p.price==0'>FREE</p>
+          <a [routerLink]="['/product', p._id]">
+            <span class="thumbnail">
+              <img class='product-img' src={{p.images[0]}} alt="...">
+              <h4>{{p.title}}</h4>
+              <p class='product-description'>{{p.description}}</p>
+              <hr class="line">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
+                  <p class="price" *ngIf='p.price==0'>FREE</p>
+                </div>
               </div>
-            </div>
-          </span>
+            </span>
           </a>
         </div>
       </div>
