@@ -16,14 +16,6 @@ const routes: Routes = [
   { path: 'conversation', component: ConversationComponent },
 
   { path: '**', component: DeleteComponent }, // PAGE NOT FOUND
-  // { path: 'players/addplayer', component: HomeNewComponent },
-  // { path: 'players/delete/:id', component: HomeNewComponent },
-
-  // { path: 'status/game/2', component: ProductsComponent },
-  // { path: 'status/game/3', component: DeleteComponent },
-  // { path: 'products/edit/:id', component: EditComponent },
-  // { path: 'products/new', component: NewComponent },
-  // { path: 'products/delete/:id', component: DeleteComponent}
 ];
 
 @NgModule({
