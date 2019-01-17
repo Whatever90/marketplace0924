@@ -38,12 +38,12 @@ export class ConversationComponent implements OnInit {
 
   ngOnInit() {
   }
-  activeConversation(conversation){
+  activeConversation(conversation) {
     this.active_conversation = conversation;
     console.log(this.active_conversation)
   }
   sendingMessage(message) {
-    if(message.length<1){
+    if (message.length < 1) {
       return;
     }
     console.log(message)
@@ -60,7 +60,7 @@ export class ConversationComponent implements OnInit {
     this._http.post('/conversations/update', obj).subscribe(
       (data) => {
         data = data.json();
-        console.log("data => ",data);
+        console.log("data => ", data);
         // this.conversation = data;
         // this.conversation.messages.reverse();
       },
