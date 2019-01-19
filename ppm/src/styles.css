@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url(https://source.unsplash.com/random);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  html, body {
+    height:100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .footer {
+    position: fixed;
+  z-index: 1000000;
+  overflow: hidden;
+  bottom: 0px;
+  left: 0px;
+  height: 100px;
+  width: 600px;
+  }

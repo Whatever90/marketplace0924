@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
     console.log("let's get IP")
     this.http.get<{ ip: string }>('https://jsonip.com')
       .subscribe(data => {
+        console.log(data)
         this.user.ip = data.ip;
         this.loginUser.ip = data.ip;
         console.log(this.loginUser)

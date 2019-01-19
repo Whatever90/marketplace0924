@@ -2,7 +2,8 @@
 	background-color: azure;
 	margin: auto 20px;
 	/* height: 300px; */
-	border: 1px solid silver
+  border: 1px solid silver;
+  height: 100%;
 }
 #main {
 	margin: auto 20px;
@@ -10,16 +11,10 @@
 	padding: 10px auto;
 }
 * {box-sizing: border-box;}
-
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background-image: url(https://source.unsplash.com/random);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+#content_main{
+  min-height: 87%;
 }
-html, body{height:100%;}
+
 #router{
   height: 100%;
   background-color: rgba(8, 7, 97, 0);
@@ -63,21 +58,12 @@ html, body{height:100%;}
 #content{
   width: 100%;
   margin: 0 auto;
- min-height: 100%;
 }
 #head_content{
   width: 70%;
   margin: 0 auto;
 }
-.footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
-}
+
 @media screen and (max-width: 500px) {
   .header a {
     float: none;

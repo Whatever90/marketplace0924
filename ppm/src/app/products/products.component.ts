@@ -72,6 +72,10 @@ export class ProductsComponent implements OnInit {
     if (!this.cur_user) {
       this._r.navigate(['/login']);
     } else {
+      if(this.cur_user._id===this.product.seller._id){
+        console.log("nope, that's your product")
+        return
+      }
       const obj = {
         id: this.cur_user._id,
         product: this.product
@@ -91,7 +95,10 @@ export class ProductsComponent implements OnInit {
   contactSeller() {
     if (!this.cur_user) {
       this._r.navigate(['/login']);
+      return 
     }
+    
+    console.log(this.product)
     let obj = {
       product: this.product,
       buyer_id: this.cur_user._id

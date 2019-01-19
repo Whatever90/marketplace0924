@@ -35,9 +35,9 @@
               placeholed='Zipcode' value={{product.location}}>
           </p>
           <h5>Seller: <a [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
-          <div *ngIf='cur_user'>
-            <div class="action" *ngIf='cur_user._id!=product.seller._id'>
-              <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">contact seller</button>
+          <div>
+            <div class="action">
+              <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">Contact Seller</button>
               <span *ngIf='cur_user'>
                 <button [disabled]='wishListIncludes' class="like btn btn-default" type="button">
                   <span class="fa fa-heart"></span>
@@ -51,8 +51,8 @@
                 </button>
               </span>
             </div>
-            <div class="action" *ngIf='cur_user._id==product.seller._id'>
-              <button type='button' class="btn btn-success" (click)='this.edit_sold_menu()'>Edit/Sold</button>
+            <div class="action" *ngIf='cur_user'>
+              <button type='button' *ngIf='cur_user._id===product.seller._id' class="btn btn-success" (click)='this.edit_sold_menu()'>Edit/Sold</button>
             </div>
           </div>
         </div>
