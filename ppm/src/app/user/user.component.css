@@ -56,9 +56,6 @@
   .list-group-item {
   position: relative;
   display: block;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: -1px;
-  background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.120);
   }
   .btn-group {
@@ -148,4 +145,50 @@
   max-width: 200px;
   max-height: 200px;
   object-fit:scale-down;
+}
+/* #new_product_form{
+  margin: 
+} */
+
+#user_top{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+  height:50px;
+  
+}
+.user_top-content{
+  
+}
+#user_mid{
+  
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+  height: 1000px;
+}
+#user_mid1{
+  width:25%;
+  height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+}
+#user_mid2{
+  width: 75%;
+  height: 100%;
+}
+.container-body{
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255,255,255,0.9);
 }
