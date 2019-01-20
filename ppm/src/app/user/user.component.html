@@ -1,26 +1,26 @@
 <div class="container " *ngIf='user!=null'>
-    <div class="btn-group btn-group-justified">
-        <!-- <a href='#' class="btn btn-info cat" *ngIf='user._id!=cur_user_id'><h3>{{user.alias}}</h3></a> -->
-  
-        <a href='#' class="btn btn-info cat" *ngIf='user._id===cur_user_id' (click)="adding($event)">
-          <h3>+ POST AN ITEM</h3>
-        </a>
-        <a href="#" class="btn btn-default">
-          <h4>TOTAL OF ITEMS: {{products.length}}</h4>
-        </a>
-        <a href="#" (click)='showWishList()' class="btn btn-default" *ngIf='user.wishList && user.wishList.length>0'>
-          <h4>WISH LIST {{user.wishList.length}}</h4>
-        </a>
-        <a href="#" disabled class="btn btn-default" *ngIf='!user.wishList || user.wishList.length==0'>
-          <h4>Wish list is empty</h4>
-        </a>
-        <a [routerLink]="['/conversation']" *ngIf='user._id===cur_user_id' class="btn btn-default">
-          <h4>Conversations</h4>
-        </a>
-      </div>
+  <div class="btn-group btn-group-justified">
+    <!-- <a href='#' class="btn btn-info cat" *ngIf='user._id!=cur_user_id'><h3>{{user.alias}}</h3></a> -->
+
+    <a href='#' class="btn btn-info cat" *ngIf='user._id===cur_user_id' (click)="adding($event)">
+      <h3>+ POST AN ITEM</h3>
+    </a>
+    <a href="#" class="btn btn-default">
+      <h4>TOTAL OF ITEMS: {{products.length}}</h4>
+    </a>
+    <a href="#" (click)='showWishList()' class="btn btn-default" *ngIf='user.wishList && user.wishList.length>0'>
+      <h4>WISH LIST {{user.wishList.length}}</h4>
+    </a>
+    <a href="#" disabled class="btn btn-default" *ngIf='!user.wishList || user.wishList.length==0'>
+      <h4>Wish list is empty</h4>
+    </a>
+    <a [routerLink]="['/conversation']" *ngIf='user._id===cur_user_id' class="btn btn-default">
+      <h4>Conversations</h4>
+    </a>
+  </div>
   <div class='container-body'>
-    
-      
+
+
     <div id='user_mid'>
       <div id='user_mid1'>
         <div class="list-group-item">
@@ -32,30 +32,79 @@
         </div>
       </div>
       <div id='user_mid2'>
-          <div class="shop-tab" *ngIf='!adder && products.length>0'>
-              <div class="col-md-3" *ngFor='let p of products'>
-                <a [routerLink]="['/product', p._id]">
-                  <span class="thumbnail">
-                    <img class='product-img' src={{p.images[0]}} alt="...">
-                    <h4>{{p.title}}</h4>
-                    <p class='product-description'>{{p.description}}</p>
-                    <hr class="line">
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6">
-                        <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
-                        <p class="price" *ngIf='p.price==0'>FREE</p>
+        <!-- PRODUCT ADDING FORM -->
+        <div>
+          <!-- *ngIf='adder' add this-->
+          <div class="panel-heading">
+              <h3 class="panel-title">Post a product</h3>
+            </div>
+          <form name='productForm' (submit)="adding_submit()" #productForm="ngForm">
+            <div id='product_form'>
+              <div class="form-group row product-from-element">
+                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" name="title" id="title" required minlength="3" maxlength="24" [(ngModel)]="product.title"
+                    #title='ngModel' class="form-control" placeholder="title">
+
+                  <!-- <strong *ngIf='title.valid && ( title.dirty || title.touched)'><span style="color: green">
+                      Looks good!</span></strong>
+                  <strong *ngIf='title.invalid && ( title.dirty || title.touched)'><span style="color: red"> Title
+                      must
+                      be at least 3 characters long</span></strong> -->
+                </div>
+              </div>
+              <div class="form-group row product-from-element">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group row product-from-element">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row product-from-element">
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                       </div>
                     </div>
-                  </span>
-                </a>
+              <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
               </div>
             </div>
-            <!-- Product list END -->
-      
-            <!-- Empty list -->
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length===0'>
-              <h2>Nothing for sale</h2>
-            </div>
+          </form>
+        </div>
+
+
+        <div class="shop-tab" *ngIf='!adder && products.length>0'>
+          <div class="col-md-3" *ngFor='let p of products'>
+            <a [routerLink]="['/product', p._id]">
+              <span class="thumbnail">
+                <img class='product-img' src={{p.images[0]}} alt="...">
+                <h4>{{p.title}}</h4>
+                <p class='product-description'>{{p.description}}</p>
+                <hr class="line">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
+                    <p class="price" *ngIf='p.price==0'>FREE</p>
+                  </div>
+                </div>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product list END -->
+
+        <!-- Empty list -->
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 shop-tab" *ngIf='!adder && products.length===0'>
+          <h2>Nothing for sale</h2>
+        </div>
 
       </div>
     </div>
