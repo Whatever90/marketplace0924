@@ -16,6 +16,8 @@ export class UserComponent implements OnInit {
   cur_user_id = null;
   adder = false;
   product = new Product();
+  fileToUpload: File = null;
+  categories = ['Mens Clothing', 'Womens Clothing', 'Cars', 'Home and Garden', 'Electronics', 'Baby and Child', 'Other'];
 
   constructor(private _taskService: TaskService, private _route: ActivatedRoute) {
     this._route.paramMap.subscribe(params => {
@@ -73,6 +75,10 @@ export class UserComponent implements OnInit {
   }
   showWishList() {
     console.log('show then your wish list, Carl');
+  }
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    console.log(files)
   }
   ngOnInit() {
     this._taskService.getUser(this.id, function (data, err) {
