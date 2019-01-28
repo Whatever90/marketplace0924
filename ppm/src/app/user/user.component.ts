@@ -14,9 +14,11 @@ export class UserComponent implements OnInit {
   products = [];
   id;
   cur_user_id = null;
-  adder = false;
+  adder = true;
   product = new Product();
   fileToUpload: File = null;
+  imgError = null;
+  product_submitted = false;
   categories = ['Mens Clothing', 'Womens Clothing', 'Cars', 'Home and Garden', 'Electronics', 'Baby and Child', 'Other'];
 
   constructor(private _taskService: TaskService, private _route: ActivatedRoute) {
@@ -52,13 +54,10 @@ export class UserComponent implements OnInit {
     this.adder = true;
   }
   adding_submit() {
+    console.log(this.product)
+    this.product_submitted = true;
+    this.adder = false;
     this.product.seller = this.cur_user_id;
-    if (this.product.images.length === 0) {
-      let temp = Math.floor(Math.random() * 10 + 1);
-      for (let i = 0; i < temp; i++) {
-        this.product.images.push('https://source.unsplash.com/collection/1163637/480x480');
-      }
-    }
     this._taskService.newProduct(this.product, function (data, err) {
       if (data) {
         console.log(data);
@@ -68,7 +67,6 @@ export class UserComponent implements OnInit {
     });
     this.product = new Product();
     this.adding_cancel();
-
   }
   adding_cancel() { // just canceling form
     this.adder = false;
@@ -84,15 +82,17 @@ export class UserComponent implements OnInit {
       return;
     }
     if (files.item(0).type.slice(0, 5) !== 'image') {
-      console.log("no image", files.item(0).type.slice(0, 5))
+      this.imgError = 'Wrong file format';
     } else {
       console.log('image')
       if (files.item(0).size > 5242880) {
-        console.log("too heavy")
+        this.imgError = ' Please upload a file less than 5MB'
       } else {
         console.log('ok size', files.item(0).size / 1048576)
         this.encodeImageFileAsURL(files.item(0))
         input.value = '';
+        this.imgError = null;
+        console.log(input)
       }
     }
   }

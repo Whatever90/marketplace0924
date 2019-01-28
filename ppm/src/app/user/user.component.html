@@ -31,32 +31,46 @@
       </div>
       <div id='user_mid2'>
         <!-- PRODUCT ADDING FORM -->
-        <div class='new_product_box'>
-          <!-- *ngIf='adder' add this-->
+        <div *ngIf='adder' class='new_product_box'>
+          <!--  add this-->
 
           <form name='productForm' (submit)="adding_submit()" #productForm="ngForm">
             <div class='new_product_form_top'>
-              <h3 class="panel-title">Post a product</h3>
+              <h3 class="panel-title">Post a product. Please make you sure fill all fields.</h3>
               <div class='new_product_form_top_row'>
                 <div>
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" required [(ngModel)]="product.title" name="title">
+                  <input type="text" class="form-control" id="title" required [(ngModel)]="product.title" name="title" #title="ngModel">
+                  <span *ngIf="title.invalid && (title.dirty || title.touched)"
+                      class="alert-sm">
+                      Title is required
+                  </span>
                 </div>
-
                 <div>
                   <label for="price">Price</label>
-                  <input type="number" class="form-control" id="price" [(ngModel)]="product.price" name="price">
+                  <input type="number" placeholder='$' value=0 class="form-control" id="price" [(ngModel)]="product.price" name="price" #price="ngModel">
+                  <div *ngIf="price.invalid && (price.dirty || price.touched)"
+                      class="alert-sm">
+                      Price is required
+                  </div>
                 </div>
                 <div>
                   <label for="location">Location</label>
-                  <input type="number" class="form-control" id="location" [(ngModel)]="product.location" name="location">
+                  <input type="number" placeholder='Zip Code' pattern="^\d{5}(?:[-\s]\d{4})?$" class="form-control" id="location" [(ngModel)]="product.location" name="location" #location="ngModel">
+                  <div *ngIf="location.invalid && (location.dirty || location.touched)"
+                      class="alert-sm">
+                      Enter Zipcode
+                  </div>
                 </div>
                 <div>
                   <label for="category">Category</label>
-                  <select class="form-control" id="category" 
-                        required>
-                  <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-                </select>
+                  <select class="form-control" id="category" required [(ngModel)]="product.category" name="category" #category="ngModel">
+                    <option *ngFor="let category of categories" value={{category}}>{{category}}</option>
+                  </select>
+                  <div *ngIf="category.invalid && (category.dirty || category.touched)"
+                      class="alert-sm">
+                      Category in required
+                  </div>
                 </div>
               </div>
 
@@ -68,17 +82,27 @@
               </div>
             </div>
             <div class='new_product_form_bottom'>
-              <div class="form-group">
-                <label for="file">Choose File</label>
-                <input type="file" id="file" (change)="handleFileInput($event.target)" accept=".jpg, .jpeg, .png">
+              <div class='new_product_form_bottom_buttons'>
+                <div>
+                  <label class="btn btn-default">
+                    Choose File <input type="file" id="file" (change)="handleFileInput($event.target)" accept=".jpg, .jpeg, .png"
+                      style='display: none'> <span style='color: red; margin-left: 15px'>{{imgError}}</span>
+                  </label>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-success" [disabled]='productForm.invalid'>Submit</button>
+                </div>
               </div>
               <div class='new_product_form_bottom_images_list'>
-                  <img *ngFor='let img of product.images' src={{img}}>
+                <img *ngFor='let img of product.images' src={{img}}>
               </div>
             </div>
           </form>
         </div>
-
+        <div *ngIf='product_submitted' class="alert alert-success" style='border-radius: 0px' role="alert">
+            <h4 class="alert-heading">Well done!</h4>
+            <p>Aww yeah, you successfully posted a new product.</p>
+          </div>
 
         <div class="shop-tab" *ngIf='!adder && products.length>0'>
           <div class="col-md-3" *ngFor='let p of products'>
