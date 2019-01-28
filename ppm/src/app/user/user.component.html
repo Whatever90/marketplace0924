@@ -70,10 +70,10 @@
             <div class='new_product_form_bottom'>
               <div class="form-group">
                 <label for="file">Choose File</label>
-                <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+                <input type="file" id="file" (change)="handleFileInput($event.target)" accept=".jpg, .jpeg, .png">
               </div>
               <div class='new_product_form_bottom_images_list'>
-
+                  <img *ngFor='let img of product.images' src={{img}}>
               </div>
             </div>
           </form>

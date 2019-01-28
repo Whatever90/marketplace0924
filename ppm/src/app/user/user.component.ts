@@ -76,9 +76,32 @@ export class UserComponent implements OnInit {
   showWishList() {
     console.log('show then your wish list, Carl');
   }
-  handleFileInput(files: FileList) {
+  handleFileInput(input) {
+    let files = input.files
     this.fileToUpload = files.item(0);
-    console.log(files)
+    console.log(files.item(0))
+    if (!files.item(0)) {
+      return;
+    }
+    if (files.item(0).type.slice(0, 5) !== 'image') {
+      console.log("no image", files.item(0).type.slice(0, 5))
+    } else {
+      console.log('image')
+      if (files.item(0).size > 5242880) {
+        console.log("too heavy")
+      } else {
+        console.log('ok size', files.item(0).size / 1048576)
+        this.encodeImageFileAsURL(files.item(0))
+        input.value = '';
+      }
+    }
+  }
+  encodeImageFileAsURL(element) {
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      this.product.images.push(reader.result)
+    }.bind(this)
+    reader.readAsDataURL(element)
   }
   ngOnInit() {
     this._taskService.getUser(this.id, function (data, err) {

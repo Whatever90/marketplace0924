@@ -233,3 +233,15 @@
 	align-items: stretch;
 	align-content: center;
 }
+.new_product_form_bottom_images_list{
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+}
+.new_product_form_bottom_images_list img{
+  max-width: 100px;
+  margin: 5px;
+}
