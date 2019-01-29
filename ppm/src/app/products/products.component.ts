@@ -9,7 +9,13 @@ import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
+  styles: [`
+    drag-scroll {
+      height: 50px
+      width: 100px
+    }
+    `]
 })
 export class ProductsComponent implements OnInit {
   product_id;
@@ -146,6 +152,7 @@ export class ProductsComponent implements OnInit {
       this.edit_sold_menu_status = true;
     }
   }
+
   ngOnInit() {
   }
 

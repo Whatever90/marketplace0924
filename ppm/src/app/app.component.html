@@ -1,6 +1,6 @@
 <div class="header">
   <div id="head_content">
-    <a href="#default" class="logo">MarketPlace</a>
+    <a href="/" class="logo">MarketPlace</a>
     <div class="header-right">
       <a [routerLink]="['/user',user._id]" *ngIf="user!=null">{{ user.alias }}</a>
       <a [routerLink]="['/login']" *ngIf="user==null">Login/Registration</a>

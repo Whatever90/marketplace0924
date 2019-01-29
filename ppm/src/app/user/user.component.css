@@ -164,14 +164,14 @@
   
 }
 #user_mid{
-  
+  min-height: 40em;
   display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: stretch;
 	align-content: stretch;
-  height: 1000px;
+  /* height: 1000px; */
 }
 #user_mid1{
   width:25%;
@@ -188,7 +188,7 @@
   height: 100%;
 }
 .container-body{
-  height: 100%;
+  min-height: 50%;
   width: 100%;
   background-color: rgba(255,255,255, 1);
 }
@@ -207,6 +207,10 @@
   margin: 0px auto;
 }
 .new_product_box{
+  
+  padding-top: 25px;
+  padding-bottom: 25px;
+
   margin: 0px auto;
   width: 90%;
   display: flex;

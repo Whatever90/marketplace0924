@@ -1,4 +1,4 @@
-<div class="container " *ngIf='user!=null'>
+<div class="container" style='height: 100%;' *ngIf='user!=null'>
   <div class="btn-group btn-group-justified">
     <!-- <a href='#' class="btn btn-info cat" *ngIf='user._id!=cur_user_id'><h3>{{user.alias}}</h3></a> -->
 
@@ -24,9 +24,9 @@
         <div class="list-group-item">
           <h2>{{user.alias}}</h2>
         </div>
-        <div class="list-group-item">
-          <h4>GOOGLE MAP</h4>
-          <p *ngIf='products.length>0'> {{products[products.length-1].location}}</p>
+        <div *ngIf='products.length>0' class="list-group-item">
+          <h4>Location of the last item</h4>
+          <p> {{products[products.length-1].location}}</p>
         </div>
       </div>
       <div id='user_mid2'>
@@ -48,8 +48,8 @@
                 </div>
                 <div>
                   <label for="price">Price</label>
-                  <input type="number" placeholder='$' value=0 class="form-control" id="price" [(ngModel)]="product.price" name="price" #price="ngModel">
-                  <div *ngIf="price.invalid && (price.dirty || price.touched)"
+                  <input type="number" placeholder='$' ng-pattern="/^[0-9]{1,7}$/" class="form-control" id="price" [(ngModel)]="product.price" name="price" #price="ngModel">
+                  <div *ngIf="price.invalid"
                       class="alert-sm">
                       Price is required
                   </div>
@@ -78,7 +78,11 @@
               <div class='new_product_form_top_row'>
                 <label for="description">Description</label>
                 <textarea type="text" class="form-control" id="description" required [(ngModel)]="product.description"
-                  name="description"></textarea>
+                  name="description" #description='ngModel'></textarea>
+                  <span *ngIf="description.invalid && (description.dirty || description.touched)"
+                      class="alert-sm" style='background-color: white;'>
+                      Description in required
+                  </span>
               </div>
             </div>
             <div class='new_product_form_bottom'>

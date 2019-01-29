@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
-
+import { DragScrollModule } from 'ngx-drag-scroll';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -36,7 +36,8 @@ import { ConversationComponent } from './conversation/conversation.component';
     FormsModule,
     AppRoutingModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    DragScrollModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

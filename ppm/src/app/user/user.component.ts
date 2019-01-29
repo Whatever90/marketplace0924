@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
   products = [];
   id;
   cur_user_id = null;
-  adder = true;
+  adder = false;
   product = new Product();
   fileToUpload: File = null;
   imgError = null;
@@ -60,11 +60,12 @@ export class UserComponent implements OnInit {
     this.product.seller = this.cur_user_id;
     this._taskService.newProduct(this.product, function (data, err) {
       if (data) {
+        this.products.push(data)
         console.log(data);
       } else {
         console.log(err);
       }
-    });
+    }.bind(this));
     this.product = new Product();
     this.adding_cancel();
   }

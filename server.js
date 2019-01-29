@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+
 const jsonParser = require('body-parser').json();
-app.use(bodyParser.json()); 
+app.use(bodyParser.json({limit: '50mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 var mongoose = require('mongoose');
 require('./server/config/mongoose.js');
 const checkForSession = require('./server/config/checkForSession');

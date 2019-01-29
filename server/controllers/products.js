@@ -27,6 +27,7 @@ module.exports = {
     })
   },
   create: function (req, res) {
+    // console.log(req.body)
     var product = new Product({
       title: req.body.title,
       price: req.body.price,
