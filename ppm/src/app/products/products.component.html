@@ -1,31 +1,21 @@
-<div class="container" *ngIf='product'>
+<div *ngIf='showModal' (click)='closeImageModal()' id='modal' >
+    <div id='innerModal'>
+        <img  src={{active_image}} />
+    </div>
+    
+</div>
+<div class="container" style='height: 70vh' *ngIf='product'>
   <div class="card">
     <div class="container-fliud">
       <div class="wrapper row">
         <div class="preview col-md-6">
-          <!-- <div class="preview-pic tab-content">
-            <span *ngFor='let image of product.images; index as i'>
-              
-                <div *ngIf='i===0' class="tab-pane active"  id="pic-{{i}}"><img src={{image}} /></div>
-                <div *ngIf='i!==0' class="tab-pane"  id="pic-{{i}}"><img src={{image}} /></div>
-            </span>
-          
-            <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+             
+          <div class="preview-pic tab-content">
+                <div class="tab-pane active" ><img (click)='openImageModal()' src={{active_image}} /></div>
           </div>
           <ul class="preview-thumbnail nav nav-tabs">
-            <li *ngFor='let image of product.images; index as i'><a data-target="#pic-{{i}}" data-toggle="tab"><img src={{image}} /></a></li>
-          </ul> -->
-          
-
-            <drag-scroll>
-                <img drag-scroll-item *ngFor="let image of product.images" [src]="image" />
-               
-              </drag-scroll>
-
-
+              <li *ngFor='let image of product.images; index as i'><a (click)='activeImageSwitch(i)' data-toggle="tab"><img src={{image}} /></a></li>
+            </ul>
         </div>
         <div class="details col-md-6">
           <p><textarea style="font-size: 21.7333px;" rows="1" placeholder='Title' [disabled]='!edit_sold_menu_status'>{{product.title}}</textarea></p>

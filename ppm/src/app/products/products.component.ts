@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Anonpost } from '../anonpost';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Http } from '@angular/http';
 import { TaskService } from '../task.service';
 import { DOCUMENT } from '@angular/common';
+import { Inject }  from '@angular/core';
 
 @Component({
   selector: 'app-products',
@@ -28,13 +29,20 @@ export class ProductsComponent implements OnInit {
   message = '';
   photo_buyer;
   photo_seller;
+  active_image = null;
   edit_sold_menu_status = false;
+  showModal = false;
+
+
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute, private _http: Http) {
     this._route.paramMap.subscribe(params => {
       this.product_id = params.get('id');
       this._taskService.findProduct(this.product_id, function (data, err) { // searching for a product by ID
         if (data.name !== 'CastError') {
           this.product = data;
+          if(data.images.length>0){
+            this.active_image = data.images[0];
+          }
           this.findSeller(data.seller);
           this.checkCurUser();
         } else {
@@ -152,8 +160,17 @@ export class ProductsComponent implements OnInit {
       this.edit_sold_menu_status = true;
     }
   }
-
+  activeImageSwitch(idx){
+    this.active_image = this.product.images[idx];
+  }
+  openImageModal(){
+    this.showModal = true;
+  }
+  closeImageModal(){
+    this.showModal = false;
+  }
   ngOnInit() {
   }
 
 }
+
