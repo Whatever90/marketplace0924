@@ -2,45 +2,37 @@
   <div class="row">
 
     <div class="btn-group btn-group-justified">
-      <a href="#" class="btn btn-info cat">
-        <h4><i class="fa fa-bars" aria-hidden="true"></i> CATEGORIES</h4>
-      </a>
-      <a href="#" class="btn btn-default">
-        <h4>ABOUT</h4>
-      </a>
-      <a href="#" class="btn btn-default">
-        <h4>RETURNS</h4>
-      </a>
-      <a href="#" class="btn btn-default">
-        <h4>DELIVERY</h4>
-      </a>
     </div>
 
     <div class="col-md-12 shop-tab-container">
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 shop-tab-menu">
         <div class="list-group">
-            <a href="#" class="list-group-item">
-                <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Mens Clothing</h4>
-              </a>
-              <a href="#" class="list-group-item">
-                <h4><i class="fa fa-chevron-right" aria-hidden="true"></i> Womens Clothing</h4>
-              </a>
-          <a href="#" class="list-group-item">
-            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i>Cars</h4>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i>Home and Garden</h4>
-          </a>
-          
-          <a href="#" class="list-group-item">
-            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i>Electronics</h4>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i>Baby and Child</h4>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4><i class="fa fa-chevron-right" aria-hidden="true"></i>Other</h4>
-          </a>
+            <button class="list-group-item" (click)='selectCategory("All")'>
+                <h4>
+                  All<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="All"'></i></h4>
+            </button>
+          <button class="list-group-item" (click)='selectCategory("Mens Clothing")' >
+            <h4> Mens Clothing<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Mens Clothing"'></i></h4>
+          </button>
+          <button class="list-group-item" (click)='selectCategory("Womens Clothing")'>
+            <h4> Womens Clothing <i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Womens Clothing"'></i></h4>
+          </button>
+          <button class="list-group-item" (click)='selectCategory("Cars")'>
+            <h4>Cars<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Cars"'></i></h4>
+          </button>
+          <button class="list-group-item" (click)='selectCategory("Home and Garden")'>
+            <h4>Home and Garden<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Home and Garden"'></i></h4>
+          </button>
+
+          <button class="list-group-item" (click)='selectCategory("Electronics")'>
+            <h4>Electronics<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Electronics"'></i></h4>
+          </button>
+          <button class="list-group-item" (click)='selectCategory("Baby and Child")'>
+            <h4>Baby and Child<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Baby and Child"'></i></h4>
+          </button>
+          <button class="list-group-item" (click)='selectCategory("Other")'>
+            <h4>Other<i class="fa fa-chevron-left" aria-hidden="true" *ngIf='active_cat==="Other"'></i></h4>
+          </button>
         </div>
       </div>
       <!-- Product list START -->
@@ -71,4 +63,4 @@
 
     </div>
   </div>
-</div>  
+</div>
