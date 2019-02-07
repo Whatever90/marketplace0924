@@ -37,7 +37,7 @@
             <div class="action">
               <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">Contact Seller</button>
               <span *ngIf='cur_user'>
-                <button [disabled]='wishListIncludes' class="like btn btn-default" type="button">
+                <button [disabled]='wishListIncludes' (click)='addToWishList()' class="like btn btn-default" type="button">
                   <span class="fa fa-heart"></span>
                   add to wishlist
                 </button>

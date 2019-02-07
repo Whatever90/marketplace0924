@@ -101,7 +101,7 @@ export class ProductsComponent implements OnInit {
         } else {
           console.log(err);
         }
-      });
+      }.bind(this));
     }
   }
 

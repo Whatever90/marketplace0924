@@ -5,11 +5,11 @@
     <a href='#' class="btn btn-info cat" *ngIf='user._id===cur_user_id' (click)="adding($event)">
       <h3>+ POST AN ITEM</h3>
     </a>
-    <a href="#" class="btn btn-default">
-      <h4>TOTAL OF ITEMS: {{products.length}}</h4>
+    <a class="btn btn-default" (click)='showProductList()'>
+      <h4>TOTAL OF ITEMS: {{products.length}} <i class="fa fa-angle-left" aria-hidden="true" *ngIf='productListBool'></i></h4>
     </a>
-    <a href="#" (click)='showWishList()' class="btn btn-default" *ngIf='user.wishList && user.wishList.length>0'>
-      <h4>WISH LIST {{user.wishList.length}}</h4>
+    <a  (click)='showWishList()' class="btn btn-default" *ngIf='user.wishList && user.wishList.length>0'>
+      <h4>WISH LIST {{user.wishList.length}} <i class="fa fa-angle-left" aria-hidden="true" *ngIf='wishListBool'></i></h4>
     </a>
     <a href="#" disabled class="btn btn-default" *ngIf='!user.wishList || user.wishList.length==0'>
       <h4>Wish list is empty</h4>
@@ -29,7 +29,8 @@
           <p> {{products[products.length-1].location}}</p>
         </div>
       </div>
-      <div id='user_mid2'>
+      <div id='user_mid2' *ngIf='productListBool'>
+        <h1>Product List</h1>
         <!-- PRODUCT ADDING FORM -->
         <div *ngIf='adder' class='new_product_box'>
           <!--  add this-->
@@ -134,6 +135,34 @@
         </div>
 
       </div>
+      <div id='user_mid2' *ngIf='wishListBool'>
+        <h1>Wish List</h1>
+          <div class="shop-tab" *ngIf='wishList.length>0'>
+              <div class="col-md-3" *ngFor='let p of wishList'>
+                <a [routerLink]="['/product', p._id]">
+                  <span class="thumbnail">
+                <img class='product-img' src={{p.images[0]}} alt="...">
+                <h4>{{p.title}}</h4>
+                <p class='product-description'>{{p.description}}</p>
+                <hr class="line">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <p class="price" *ngIf='p.price>0'>${{p.price}}</p>
+                    <p class="price" *ngIf='p.price==0'>FREE</p>
+                  </div>
+                </div>
+              </span>
+                </a>
+              </div>
+            </div>
+            <!-- Product list END -->
+    
+            <!-- Empty list -->
+            
+      </div>
+
+
+
     </div>
   </div>
 </div>

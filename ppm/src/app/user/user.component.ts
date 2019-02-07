@@ -19,6 +19,9 @@ export class UserComponent implements OnInit {
   fileToUpload: File = null;
   imgError = null;
   product_submitted = false;
+  productListBool = true;
+  wishListBool = false;
+  wishList = [];
   categories = ['Mens Clothing', 'Womens Clothing', 'Cars', 'Home and Garden', 'Electronics', 'Baby and Child', 'Other'];
 
   constructor(private _taskService: TaskService, private _route: ActivatedRoute) {
@@ -27,6 +30,7 @@ export class UserComponent implements OnInit {
       this.getUser(this.id);
       this._taskService.showUser(function (data, err) { // searching user in session
         if (data) {
+          console.log(data)
           this.cur_user_id = data._id;
         }
       }.bind(this));
@@ -37,6 +41,7 @@ export class UserComponent implements OnInit {
     this._taskService.getUser(this.id, function (data, err) {
       if (data) {
         this.user = data;
+        this.wishList = data.wishList;
         this._taskService.showMylist(this.user._id, function (d, e) {
           if (d) {
             this.products = d;
@@ -74,6 +79,14 @@ export class UserComponent implements OnInit {
   }
   showWishList() {
     console.log('show then your wish list, Carl');
+    this.wishListBool = true;
+    this.productListBool = false;
+    console.log(this.wishList, this.products)
+  }
+  showProductList(){
+    this.productListBool = true;
+    this.wishListBool = false;
+    console.log(this.wishList, this.products)
   }
   handleFileInput(input) {
     let files = input.files
