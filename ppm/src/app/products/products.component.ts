@@ -32,6 +32,7 @@ export class ProductsComponent implements OnInit {
   active_image = null;
   edit_sold_menu_status = false;
   showModal = false;
+  owner = false;
 
 
   constructor(private _taskService: TaskService, private _r: Router, private _route: ActivatedRoute, private _http: Http) {
@@ -39,6 +40,7 @@ export class ProductsComponent implements OnInit {
       this.product_id = params.get('id');
       this._taskService.findProduct(this.product_id, function (data, err) { // searching for a product by ID
         if (data.name !== 'CastError') {
+          console.log(data)
           this.product = data;
           if(data.images.length>0){
             this.active_image = data.images[0];
@@ -54,6 +56,7 @@ export class ProductsComponent implements OnInit {
   findSeller(id) {
     this._taskService.getUser(id, function (data, err) {
       if (data) {
+        console.log("found the seller")
         this.product.seller = data;
       } else {
         console.log(err);
@@ -64,6 +67,11 @@ export class ProductsComponent implements OnInit {
     this._taskService.showUser(function (data, err) {
       if (data) {
         this.cur_user = data;
+        console.log(data._id, this.product.seller, this.product)
+        if(data._id===this.product.seller){
+          this.owner = true;
+          console.log("owner is here!")
+        }
         if (!this.cur_user.wishList) {
           this.cur_user.wishList = [];
         } else {
@@ -111,7 +119,9 @@ export class ProductsComponent implements OnInit {
       this._r.navigate(['/login']);
       return 
     }
-    
+    if(this.cur_user._id === this.product.seller._id){
+      return;
+    }
     console.log(this.product)
     let obj = {
       product: this.product,

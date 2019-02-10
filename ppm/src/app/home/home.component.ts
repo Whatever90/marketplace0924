@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   showAll() {
     this._taskService.showMe(function (data, err) {
       if (data) {
+        console.log(data)
         this.products = data;
         this.hard_copy = data;
       }

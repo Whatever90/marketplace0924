@@ -24,6 +24,7 @@ export class ConversationComponent implements OnInit {
         };
         this._taskService.findAllConversations(obj, function (data, err) {
           if (data) {
+            console.log(data)
             this.conversations = data;
             this.active_conversation = this.conversations[0];
           } else {

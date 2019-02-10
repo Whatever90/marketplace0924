@@ -9,6 +9,12 @@ let temp = ''
 var Product = mongoose.model('Product');
 module.exports = {
   showAll: function (req, res) {
+    Product.find({}).sort({_id:-1}).then(result =>{
+      res.json(result)
+    })
+  },
+  /*
+  showAll: function (req, res) {
     Product.find({}, function (err, data) {
       if (err) {
         res.json(err)
@@ -17,13 +23,11 @@ module.exports = {
       }
     })
   },
+
+  */
   mylist: function (req, res) {
-    Product.find({ seller: req.body.id }, function (err, data) {
-      if (err) {
-        res.json(err)
-      } else {
-        res.json(data)
-      }
+    Product.find({ seller: req.body.id }).sort({_id:-1}).then(result =>{
+      res.json(result)
     })
   },
   create: function (req, res) {

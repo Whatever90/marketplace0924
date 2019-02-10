@@ -34,7 +34,7 @@
           </p>
           <h5>Seller: <a [routerLink]="['/user', product.seller._id]">{{product.seller.alias}}</a></h5>
           <div>
-            <div class="action">
+            <div class="action" *ngIf='!owner'>
               <button class="add-to-cart btn btn-default" (click)='contactSeller()' type="button">Contact Seller</button>
               <span *ngIf='cur_user'>
                 <button [disabled]='wishListIncludes' (click)='addToWishList()' class="like btn btn-default" type="button">
@@ -49,8 +49,8 @@
                 </button>
               </span>
             </div>
-            <div class="action" *ngIf='cur_user'>
-              <button type='button' *ngIf='cur_user._id===product.seller._id' class="btn btn-success" (click)='this.edit_sold_menu()'>Edit/Sold</button>
+            <div class="action" *ngIf='owner'>
+              <button type='button' *ngIf='cur_user._id===product.seller._id' class="btn btn-success btn-lg" (click)='this.edit_sold_menu()'>Edit/Sold</button>
             </div>
           </div>
         </div>
